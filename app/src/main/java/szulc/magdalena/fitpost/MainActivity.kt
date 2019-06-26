@@ -20,6 +20,10 @@ class MainActivity : AppCompatActivity() {
         viewPager.adapter = sectionsPagerAdapter
         val tabs: TabLayout = findViewById(R.id.tabs)
         tabs.setupWithViewPager(viewPager)
+        //set icons for tabs
+        tabs.getTabAt(0)!!.setIcon(R.drawable.map_tab)
+        tabs.getTabAt(1)!!.setIcon(R.drawable.edit)
+        tabs.getTabAt(2)!!.setIcon(R.drawable.workout_play)
         val fab: FloatingActionButton = findViewById(R.id.fab)
 
         fab.setOnClickListener { view ->

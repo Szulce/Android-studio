@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FitPost</string>
+    <string name="tab_text_1">Mapy</string>
+    <string name="tab_text_2">Posty</string>
+    <string name="tab_text_3">Ćwiczenia</string>
+</resources>

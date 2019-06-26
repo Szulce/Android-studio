@@ -4,23 +4,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import szulc.magdalena.fitpost.R
 
-/**
- * A placeholder fragment containing a simple view.
- */
+
 class PlaceholderFragment : Fragment() {
 
     private lateinit var pageViewModel: PageViewModel
+    private val NUMBER_SECTION = "section_number"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         pageViewModel = ViewModelProviders.of(this).get(PageViewModel::class.java).apply {
-            setIndex(arguments?.getInt(ARG_SECTION_NUMBER) ?: 1)
+            setIndex(arguments?.getInt(NUMBER_SECTION) ?: 1)
         }
     }
 
@@ -28,30 +25,29 @@ class PlaceholderFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.fragment_tab1, container, false)
-        val textView: TextView = root.findViewById(R.id.section_label)
-        pageViewModel.text.observe(this, Observer<String> {
-            textView.text = it
-        })
+        var root = inflater.inflate(R.layout.fragment_tab1, container, false)
+        when (arguments?.getInt(NUMBER_SECTION)?:1) {
+            1-> {
+                root = inflater.inflate(R.layout.fragment_tab1, container, false)
+            }
+            2->{
+                root = inflater.inflate(R.layout.fragment_tab2, container, false)
+            }
+            3->{
+                root = inflater.inflate(R.layout.fragment_tab3, container, false)
+
+            }
+        }
         return root
     }
 
     companion object {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private const val ARG_SECTION_NUMBER = "section_number"
 
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
         @JvmStatic
         fun newInstance(sectionNumber: Int): PlaceholderFragment {
             return PlaceholderFragment().apply {
                 arguments = Bundle().apply {
-                    putInt(ARG_SECTION_NUMBER, sectionNumber)
+                    putInt(NUMBER_SECTION, sectionNumber)
                 }
             }
         }

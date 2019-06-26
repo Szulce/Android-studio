@@ -5,6 +5,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#C8A798"
         tools:context=".MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -14,7 +15,7 @@
 
         <TextView
                 android:id="@+id/title"
-                android:layout_width="wrap_content"
+                android:layout_width="154dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:minHeight="?actionBarSize"
@@ -28,7 +29,8 @@
                 android:id="@+id/tabs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#8E2E44"/>
+                android:background="#8E2E44"
+                app:tabGravity="fill"/>
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.viewpager.widget.ViewPager
@@ -44,5 +46,5 @@
             android:layout_height="82dp"
             android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/fab_margin"
-            app:maxImageSize="100dp" android:foreground="@drawable/add_meal"/>
+            app:maxImageSize="100dp" android:foreground="@drawable/add_meal" tools:targetApi="m"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
