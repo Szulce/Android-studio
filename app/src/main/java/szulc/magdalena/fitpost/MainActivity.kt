@@ -1,31 +1,15 @@
 package szulc.magdalena.fitpost
 
 import android.os.Bundle
-import android.os.CountDownTimer
+import androidx.appcompat.app.AppCompatActivity
+import androidx.viewpager.widget.ViewPager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
-import androidx.viewpager.widget.ViewPager
-import androidx.appcompat.app.AppCompatActivity
-import android.view.Menu
-import android.view.MenuItem
 import szulc.magdalena.fitpost.ui.main.SectionsPagerAdapter
 
 class MainActivity : AppCompatActivity() {
 
-
-    //activity of timer
-
-    enum class TimerStatus {
-        Run,Pause,Stop
-    }
-
-    private lateinit var timer :CountDownTimer
-    private val excerciseLength = intArrayOf(30,60,120,60,30)//in seconds
-    private var timerActualStatus = TimerStatus.Stop
-    private var timeRemaining = 0
-
-    //end Activity of timer
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,6 +18,7 @@ class MainActivity : AppCompatActivity() {
         val sectionsPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager)
         val viewPager: ViewPager = findViewById(R.id.view_pager)
         viewPager.adapter = sectionsPagerAdapter
+
         val tabs: TabLayout = findViewById(R.id.tabs)
         tabs.setupWithViewPager(viewPager)
         //set icons for tabs
@@ -47,48 +32,31 @@ class MainActivity : AppCompatActivity() {
                 .setAction("Action", null).show()
         }
 
-        //timer Activity
-        val playFab :FloatingActionButton = findViewById(R.id.floatingActionButtonPlay)
-        val pauseFab:FloatingActionButton = findViewById(R.id.floatingActionButtonPause)
-        val stopFab:FloatingActionButton = findViewById(R.id.floatingActionButtonStop)
+        viewPager?.addOnPageChangeListener(object :ViewPager.OnPageChangeListener {
 
-        playFab.setOnClickListener {
-                runTimer()
-            timerActualStatus = TimerStatus.Run
-            updateTimerButtons()
-        }
-        pauseFab.setOnClickListener {
-                timer.cancel()
-            timerActualStatus = TimerStatus.Pause
-            updateTimerButtons()
-        }
-        stopFab.setOnClickListener {
-            timer.cancel()
-            onTimerFinish()
-        }
+            override fun onPageScrollStateChanged(state: Int) {
+            }
+
+
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+            }
+
+
+            override fun onPageSelected(position: Int) {
+                if(position == 2){
+                   fab.hide()
+                }else{
+                    fab.show()
+                }
+            }
+
+
+        })
+
+
     }
 
-    //Timer Activity functions
 
-    override fun onResume(){
-        super.onResume()
-        initTimer()
-        //TODO remove background , notification
-    }
-
-    override fun onPause() {
-        super.onPause()
-        if(timerActualStatus == TimerStatus.Run){
-            timer.cancel()
-            //TODO background timer , notification
-        }
-        else if(timerActualStatus == TimerStatus.Pause){
-            timer.cancel()
-        }else{
-
-        }
-    }
-    //end timer activity functions
 
 
 }

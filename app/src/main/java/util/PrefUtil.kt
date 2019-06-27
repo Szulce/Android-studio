@@ -3,6 +3,7 @@ package util
 import android.content.Context
 import android.preference.PreferenceManager
 import szulc.magdalena.fitpost.MainActivity
+import szulc.magdalena.fitpost.TimerActivity
 
 
 class PrefUtil {
@@ -12,14 +13,15 @@ class PrefUtil {
         private const val TIMER_STATE_ID = "szulc.magdalena.timer_state"
         private const val TIMER_REMAINING_ID = "szulc.magdalena.timer.seconds_remaining"
         private const val PREVIOUS_TIMER_LENGTH_ID = "szulc.magdalena.timer.previous_timer_length"
+        private const val PREVIOUS_EXERCISE_ID = "szulc.magdalena.timer.exercise_id"
 
-        fun getTimerState(context: Context):MainActivity.TimerStatus{
+        fun getTimerState(context: Context):TimerActivity.TimerStatus{
             val preferences = PreferenceManager.getDefaultSharedPreferences(context)
             val ordinal = preferences.getInt(TIMER_STATE_ID,0)
-            return MainActivity.TimerStatus.values()[ordinal]
+            return TimerActivity.TimerStatus.values()[ordinal]
         }
 
-        fun setTimerState(state:MainActivity.TimerStatus,context: Context){
+        fun setTimerState(state:TimerActivity.TimerStatus,context: Context){
             val editor = PreferenceManager.getDefaultSharedPreferences(context).edit()
             val ordinal = state.ordinal
             editor.putInt(TIMER_STATE_ID,ordinal)
@@ -41,6 +43,19 @@ class PrefUtil {
         fun setTimerRemaining(seconds:Long,context: Context){
             val editor = PreferenceManager.getDefaultSharedPreferences(context).edit()
             editor.putLong(TIMER_REMAINING_ID,seconds)
+            editor.apply()
+
+        }
+
+
+        fun getExerciseId(context: Context):Long{
+            val preferences = PreferenceManager.getDefaultSharedPreferences(context)
+            return preferences.getLong(PREVIOUS_EXERCISE_ID,0)
+        }
+
+        fun setExerciseId(id:Long, context: Context){
+            val editor = PreferenceManager.getDefaultSharedPreferences(context).edit()
+            editor.putLong(PREVIOUS_EXERCISE_ID,id)
             editor.apply()
 
         }
