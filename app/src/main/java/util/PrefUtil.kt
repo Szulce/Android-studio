@@ -2,8 +2,7 @@ package util
 
 import android.content.Context
 import android.preference.PreferenceManager
-import szulc.magdalena.fitpost.MainActivity
-import szulc.magdalena.fitpost.TimerActivity
+import szulc.magdalena.fitpost.ui.main.TimerFragment
 
 
 class PrefUtil {
@@ -15,13 +14,13 @@ class PrefUtil {
         private const val PREVIOUS_TIMER_LENGTH_ID = "szulc.magdalena.timer.previous_timer_length"
         private const val PREVIOUS_EXERCISE_ID = "szulc.magdalena.timer.exercise_id"
 
-        fun getTimerState(context: Context):TimerActivity.TimerStatus{
+        fun getTimerState(context: Context): TimerFragment.TimerStatus{
             val preferences = PreferenceManager.getDefaultSharedPreferences(context)
             val ordinal = preferences.getInt(TIMER_STATE_ID,0)
-            return TimerActivity.TimerStatus.values()[ordinal]
+            return TimerFragment.TimerStatus.values()[ordinal]
         }
 
-        fun setTimerState(state:TimerActivity.TimerStatus,context: Context){
+        fun setTimerState(state: TimerFragment.TimerStatus, context: Context){
             val editor = PreferenceManager.getDefaultSharedPreferences(context).edit()
             val ordinal = state.ordinal
             editor.putInt(TIMER_STATE_ID,ordinal)

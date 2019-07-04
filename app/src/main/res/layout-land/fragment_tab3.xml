@@ -15,63 +15,61 @@
             android:minWidth="403dp"
             android:minHeight="365dp"
             android:id="@+id/progressBarCountDown"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintVertical_bias="0.8"/>
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintVertical_bias="0.69"
+            android:layout_marginEnd="8dp" app:layout_constraintEnd_toStartOf="@+id/imageView2"
+            android:layout_marginRight="8dp"/>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:src="@drawable/play"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:clickable="true"
             android:id="@+id/floatingActionButtonPlay"
-            android:layout_marginBottom="88dp" app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginStart="28dp"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="28dp" android:focusable="true"
-    />
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="220dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="220dp" android:focusable="true"
+            android:layout_marginEnd="8dp" app:layout_constraintEnd_toStartOf="@+id/floatingActionButtonPause"
+            android:layout_marginRight="8dp"/>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:src="@drawable/pause"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:clickable="true"
             android:id="@+id/floatingActionButtonPause"
-            android:layout_marginBottom="56dp"
-            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toStartOf="@+id/floatingActionButtonStop" android:layout_marginRight="8dp"
-            app:layout_constraintStart_toEndOf="@+id/floatingActionButtonPlay" android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp" android:focusable="true"
-            app:layout_constraintHorizontal_bias="0.496"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:focusable="true"
+            android:layout_marginEnd="64dp" app:layout_constraintEnd_toStartOf="@+id/floatingActionButtonStop"
+            android:layout_marginRight="64dp"/>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:src="@drawable/stop"
             android:layout_width="wrap_content"
             android:layout_height="56dp"
             android:clickable="true"
             android:id="@+id/floatingActionButtonStop"
-            android:layout_marginEnd="32dp"
-            app:layout_constraintEnd_toEndOf="parent" android:layout_marginRight="32dp"
+            android:layout_marginEnd="200dp"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginRight="200dp"
             android:focusable="true"
-            app:layout_constraintStart_toEndOf="@+id/floatingActionButtonPlay" android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp" app:layout_constraintHorizontal_bias="1.0"
-            android:layout_marginBottom="88dp" app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
     />
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="96dp" android:id="@+id/textViewTimer" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:fontFamily="@font/lobster_two_bold" android:textColor="@color/colorAccent" android:textSize="72sp"
-            app:layout_constraintBottom_toTopOf="@+id/floatingActionButtonPause"
-            android:layout_marginBottom="80dp" android:text="01:00" android:layout_marginRight="16dp"
-            android:layout_marginEnd="16dp" android:layout_marginLeft="16dp" android:layout_marginStart="16dp"/>
+            android:text="01:00"
+            android:layout_marginLeft="120dp" android:layout_marginStart="120dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintVertical_bias="0.68"/>
     <ImageView
             android:src="@drawable/workout_play"
             android:layout_width="144dp"
             android:layout_height="196dp"
             android:id="@+id/imageView2"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp" android:layout_marginTop="16dp" app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="excercise image" android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/textViewTimer" app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintVertical_bias="0.836"/>
+            android:contentDescription="excercise image"
+            app:layout_constraintStart_toEndOf="@+id/textViewTimer" android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/floatingActionButtonStop"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

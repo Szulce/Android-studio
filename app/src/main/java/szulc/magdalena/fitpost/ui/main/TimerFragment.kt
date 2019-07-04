@@ -1,20 +1,22 @@
-package szulc.magdalena.fitpost
+package szulc.magdalena.fitpost.ui.main
 
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.fragment_tab3.*
+import szulc.magdalena.fitpost.R
 import util.PrefUtil
 
 /**
  * Class managing timerA
  * */
 
-class TimerActivity  : Fragment() {
+class TimerFragment  : Fragment() {
 
     enum class TimerStatus {
         Run,Pause,Stop
@@ -31,21 +33,28 @@ class TimerActivity  : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         viewOfFragment =  inflater.inflate(R.layout.fragment_tab3,container,false)
 
+        Log.i("Timer","Timer activity Tab started.")
+
         val playFab : FloatingActionButton =  viewOfFragment.findViewById(R.id.floatingActionButtonPlay)
         val pauseFab: FloatingActionButton = viewOfFragment.findViewById(R.id.floatingActionButtonPause)
         val stopFab: FloatingActionButton = viewOfFragment.findViewById(R.id.floatingActionButtonStop)
 
+
+
         playFab.setOnClickListener {
+            Log.i("startTimer","Timer start button pressed.")
             startTimer()
             timerActualStatus = TimerStatus.Run
             updateTimerButtons()
         }
         pauseFab.setOnClickListener {
+            Log.i("pauseTimer","Timer pause button pressed.")
             timer.cancel()
             timerActualStatus = TimerStatus.Pause
             updateTimerButtons()
         }
         stopFab.setOnClickListener {
+            Log.i("stopTimer","Timer stop button pressed")
             timer.cancel()
             onTimerFinish()
         }
@@ -76,6 +85,7 @@ class TimerActivity  : Fragment() {
     }
 
     private fun initTimer(){
+        Log.i("Init Timer Event","Timer init function invoked.")
 
         timerActualStatus = PrefUtil.getTimerState(viewOfFragment.context)
 
@@ -149,14 +159,17 @@ class TimerActivity  : Fragment() {
 
     private fun updateCountDownUi(){
         val minutesToFinish = timeRemaining/60
+        var minutesString = minutesToFinish.toString()
         val secondsPlusMinutesToFinish = timeRemaining - minutesToFinish * 60
-        val secondsString = secondsPlusMinutesToFinish.toString()
-        textViewTimer.text = "$minutesToFinish${
-        if(secondsString.length == 2){
-            secondsPlusMinutesToFinish
-        }else{
-            "0"+secondsPlusMinutesToFinish
-        }}"
+        var secondsString = secondsPlusMinutesToFinish.toString()
+
+        Log.i("Timer","minutes $minutesString seconds $secondsString")
+
+        if(secondsString.length != 2){
+            secondsString = "0$secondsPlusMinutesToFinish"
+        }
+
+        textViewTimer.text = "$minutesToFinish:$secondsString"
         progressBarCountDown.progress = (exerciseLength[exerciseId] - timeRemaining).toInt()
     }
 
@@ -177,6 +190,20 @@ class TimerActivity  : Fragment() {
                 floatingActionButtonPlay.isEnabled = true
                 floatingActionButtonPause.isEnabled = false
                 floatingActionButtonStop.isEnabled = true
+            }
+        }
+    }
+
+    private val NUMBER_SECTION = "3"
+
+    companion object {
+
+        @JvmStatic
+        fun newInstance(sectionNumber: Int): TimerFragment {
+            return TimerFragment().apply {
+                arguments = Bundle().apply {
+                    putInt(NUMBER_SECTION, sectionNumber)
+                }
             }
         }
     }
