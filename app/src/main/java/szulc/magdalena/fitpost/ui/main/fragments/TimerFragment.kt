@@ -1,4 +1,4 @@
-package szulc.magdalena.fitpost.ui.main
+package szulc.magdalena.fitpost.ui.main.fragments
 
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -194,7 +194,6 @@ class TimerFragment  : Fragment() {
         }
     }
 
-    private val NUMBER_SECTION = "3"
 
     companion object {
 
@@ -202,7 +201,7 @@ class TimerFragment  : Fragment() {
         fun newInstance(sectionNumber: Int): TimerFragment {
             return TimerFragment().apply {
                 arguments = Bundle().apply {
-                    putInt(NUMBER_SECTION, sectionNumber)
+                    putInt("3", sectionNumber)
                 }
             }
         }

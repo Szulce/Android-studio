@@ -2,7 +2,7 @@ package util
 
 import android.content.Context
 import android.preference.PreferenceManager
-import szulc.magdalena.fitpost.ui.main.TimerFragment
+import szulc.magdalena.fitpost.ui.main.fragments.TimerFragment
 
 
 class PrefUtil {

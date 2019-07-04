@@ -5,6 +5,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import szulc.magdalena.fitpost.R
+import szulc.magdalena.fitpost.ui.main.fragments.MapFragment
+import szulc.magdalena.fitpost.ui.main.fragments.MasotodonFragment
+import szulc.magdalena.fitpost.ui.main.fragments.TimerFragment
 
 private val TAB_TITLES = arrayOf(
     R.string.tab_text_1,
