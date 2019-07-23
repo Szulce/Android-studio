@@ -16,14 +16,14 @@ class MapFragment {
 
     private lateinit var viewOfFragment:View
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        viewOfFragment =  inflater.inflate(R.layout.fragment_tab3,container,false)
-
-
-        Log.i("MAP","Map activity Tab started.")
-
-        return viewOfFragment
-    }
+//    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+//        viewOfFragment =  inflater.inflate(R.layout.fragment_tab1,container,false)
+//
+//
+//        Log.i("MAP","Map activity Tab started.")
+//
+//        return viewOfFragment
+//    }
 
 
 
