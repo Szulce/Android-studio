@@ -3,4 +3,5 @@
     <string name="tab_text_1">Maps</string>
     <string name="tab_text_2">Posts</string>
     <string name="tab_text_3">Exercises</string>
+    <string name="google_maps_API_key" translatable="false">AIzaSyBBpxR0F5EW3BQRz7fWJr5BlAx8a_2PhoY</string>
 </resources>

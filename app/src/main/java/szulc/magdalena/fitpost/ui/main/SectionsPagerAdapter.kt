@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import szulc.magdalena.fitpost.R
 import szulc.magdalena.fitpost.ui.main.fragments.MapFragment
-import szulc.magdalena.fitpost.ui.main.fragments.MasotodonFragment
+import szulc.magdalena.fitpost.ui.main.fragments.MastodonFragment
 import szulc.magdalena.fitpost.ui.main.fragments.TimerFragment
 
 private val TAB_TITLES = arrayOf(
@@ -28,7 +28,7 @@ class SectionsPagerAdapter(private val context: Context, fm: FragmentManager) : 
             }
             1->{
 
-                return MasotodonFragment.newInstance(position+1)
+                return MastodonFragment.newInstance(position+1)
             }
             2->{
                 return TimerFragment.newInstance(position+1)

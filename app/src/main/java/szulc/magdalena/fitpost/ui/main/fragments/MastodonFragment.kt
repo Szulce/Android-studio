@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import szulc.magdalena.fitpost.R
 
 
@@ -12,12 +13,12 @@ import szulc.magdalena.fitpost.R
  * Class to manage mastodon fragment
  * */
 
-class MasotodonFragment {
+class MastodonFragment : Fragment() {
 
     private lateinit var viewOfFragment:View
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        viewOfFragment =  inflater.inflate(R.layout.fragment_tab3,container,false)
+        viewOfFragment =  inflater.inflate(R.layout.fragment_tab2,container,false)
 
         Log.i("Mastodon","Post activity Tab started.")
 
@@ -29,8 +30,8 @@ class MasotodonFragment {
     companion object {
 
         @JvmStatic
-        fun newInstance(sectionNumber: Int): TimerFragment {
-            return TimerFragment().apply {
+        fun newInstance(sectionNumber: Int): MastodonFragment {
+            return MastodonFragment().apply {
                 arguments = Bundle().apply {
                     putInt("2", sectionNumber)
                 }
