@@ -16,7 +16,8 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.fragment_tab3.*
 import szulc.magdalena.fitpost.R
-import szulc.magdalena.fitpost.TimerExpiredReceiver
+import szulc.magdalena.fitpost.Receivers.TimerExpiredReceiver
+import util.NotificationUtil
 import util.PrefUtil
 import java.util.*
 
@@ -76,7 +77,7 @@ class TimerFragment : Fragment() {
         initTimer()
 
         removeAlarm(viewOfFragment.context)
-        //TODO hide notification
+        NotificationUtil.hideTimerNotificationUtil(viewOfFragment.context)
     }
 
     @RequiresApi(Build.VERSION_CODES.KITKAT)
@@ -86,9 +87,10 @@ class TimerFragment : Fragment() {
         if (timerActualStatus == TimerStatus.Run) {
             timer.cancel()
             val wakeUpTime = setAlarm(viewOfFragment.context, nowSeconds, timeRemaining)
-            //TODO notification
+            NotificationUtil.showTimerRunning(viewOfFragment.context,wakeUpTime)
         } else if (timerActualStatus == TimerStatus.Pause) {
             timer.cancel()
+            NotificationUtil.showTimerPaused(viewOfFragment.context)
         }
 
         PrefUtil.setPrevoiusTimerLength(exerciseLength[exerciseId], viewOfFragment.context)

@@ -14,6 +14,8 @@ import szulc.magdalena.fitpost.AppConstants
 import szulc.magdalena.fitpost.R
 import szulc.magdalena.fitpost.Receivers.TimerNotificationReceiver
 import szulc.magdalena.fitpost.ui.main.fragments.TimerFragment
+import java.text.SimpleDateFormat
+import java.util.*
 
 class NotificationUtil {
     companion object{
@@ -23,17 +25,69 @@ class NotificationUtil {
 
         @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
         fun showTimerExpired(context: Context){
+            val stopIntent = Intent(context,TimerNotificationReceiver::class.java)
+            stopIntent.action = AppConstants.ACTION_STOP
+            val stopPendingIntent = PendingIntent.getBroadcast(context,0,stopIntent,PendingIntent.FLAG_UPDATE_CURRENT)
+            val pauseIntent = Intent(context,TimerNotificationReceiver::class.java)
+            pauseIntent.action = AppConstants.ACTION_PAUSE
+            val pausePendingIntent = PendingIntent.getBroadcast(context,0,pauseIntent,PendingIntent.FLAG_UPDATE_CURRENT)
+
+
+            val notificationBuilder = getNotificationBuilder(context, CHANNEL_TIMER_ID,true)
+            notificationBuilder.setContentTitle("Timer is Running")
+                .setContentText("End?")
+                .setContentIntent(getPendingIntentWithStack(context,TimerFragment::class.java))
+                .setOngoing(true)
+                .addAction(R.drawable.stop,"stop",stopPendingIntent)
+                .addAction(R.drawable.pause,"pause",pausePendingIntent)
+
+            val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(CHANNEL_TIMER_ID, CHANNEL_NAME_TIMER,true)
+            notificationManager.notify(TIMER_ID,notificationBuilder.build())
+
+
+        }
+
+        @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
+        fun showTimerRunning(context: Context,wakeUpTime:Long){
+
             val startIntent = Intent(context,TimerNotificationReceiver::class.java)
             startIntent.action = AppConstants.ACTION_START
             val startPendingIntent = PendingIntent.getBroadcast(context,0,startIntent,PendingIntent.FLAG_UPDATE_CURRENT)
+
+            val dateFormat = SimpleDateFormat.getTimeInstance(SimpleDateFormat.SHORT)
+
             val notificationBuilder = getNotificationBuilder(context, CHANNEL_TIMER_ID,true)
-            notificationBuilder.setContentTitle("Timer Expired")
-                .setContentText("Start Again?")
+            notificationBuilder.setContentTitle("Timer is Running")
+                .setContentText("END : ${dateFormat.format(Date(wakeUpTime))}")
                 .setContentIntent(getPendingIntentWithStack(context,TimerFragment::class.java))
-                .addAction(R.drawable.play,"Start",startPendingIntent)
+                .setOngoing(true)
+                .addAction(R.drawable.stop,"start",startPendingIntent)
 
             val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            //notificationManager.createNotificationChannel()
+            notificationManager.createNotificationChannel(CHANNEL_TIMER_ID, CHANNEL_NAME_TIMER,true)
+            notificationManager.notify(TIMER_ID,notificationBuilder.build())
+
+
+        }
+
+        @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
+        fun showTimerPaused(context: Context){
+            val resumeIntent = Intent(context,TimerNotificationReceiver::class.java)
+            resumeIntent.action = AppConstants.ACTION_RESUME
+            val resumePendingIntent = PendingIntent.getBroadcast(context,0,resumeIntent,PendingIntent.FLAG_UPDATE_CURRENT)
+
+            val notificationBuilder = getNotificationBuilder(context, CHANNEL_TIMER_ID,true)
+            notificationBuilder.setContentTitle("Timer is Paused.")
+                .setContentText("Resume ?")
+                .setContentIntent(getPendingIntentWithStack(context,TimerFragment::class.java))
+                .setOngoing(true)
+                .addAction(R.drawable.play,"resume",resumePendingIntent)
+
+            val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(CHANNEL_TIMER_ID, CHANNEL_NAME_TIMER,true)
+            notificationManager.notify(TIMER_ID,notificationBuilder.build())
+
 
         }
 
@@ -61,8 +115,8 @@ class NotificationUtil {
 
         }
 
-        @TargetApi(24)
-        private fun NotificationManager.createNotificationChannel(channelName :String,channelId: String,playSound: Boolean){
+        @TargetApi(26)
+        private fun NotificationManager.createNotificationChannel(channelId:String,channelName: String,playSound: Boolean){
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
                 val channelImportance = if(playSound)NotificationManager.IMPORTANCE_DEFAULT
                 else NotificationManager.IMPORTANCE_LOW
@@ -71,6 +125,11 @@ class NotificationUtil {
                 notificationChannel.lightColor = Color.BLUE
                 this.createNotificationChannel(notificationChannel)
             }
+        }
+
+        fun hideTimerNotificationUtil(context: Context){
+            val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.cancel(TIMER_ID)
         }
     }
 }
