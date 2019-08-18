@@ -75,15 +75,15 @@ object Authenticator {
         instanceName: String,
         clientId: String,
         clientSecret: String,
-        email: String,
-        password: String
+        email: String?,
+        password: String?
     ): AccessToken {
         print("token $%#")
         val client = MastodonClient.Builder(instanceName, OkHttpClient.Builder(), Gson()).build()
         print("client $%#")
         val apps = Apps(client)
         print("app $%#")
-        return apps.postUserNameAndPassword(clientId, clientSecret, Scope(), email, password).execute()
+        return apps.postUserNameAndPassword(clientId, clientSecret, Scope(), email!!, password!!).execute()
     }
 
     fun appRegistration(instanceName: String): AppRegistration {

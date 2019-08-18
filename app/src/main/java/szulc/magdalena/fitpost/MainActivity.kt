@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
                 .setAction("Action", null).show()
         }
 
-        viewPager?.addOnPageChangeListener(object :ViewPager.OnPageChangeListener {
+        viewPager.addOnPageChangeListener(object :ViewPager.OnPageChangeListener {
 
             override fun onPageScrollStateChanged(state: Int) {
             }
@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onPageSelected(position: Int) {
                 if(position == 2){
-                   fab.hide()
+                    fab.hide()
                 }else{
                     fab.show()
                 }

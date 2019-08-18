@@ -62,6 +62,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".mastodon.AboutActivity"/>
+        <activity android:name=".mastodon.Main2Activity"/>
+        <activity android:name=".mastodon.MainActivityOLD"/>
 
         <meta-data
                 android:name="preloaded_fonts"

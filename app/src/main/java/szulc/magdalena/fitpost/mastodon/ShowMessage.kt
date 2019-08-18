@@ -8,6 +8,7 @@ import com.sys1yagi.mastodon4j.api.entity.Status
 import com.sys1yagi.mastodon4j.api.method.Statuses
 import kotlinx.android.synthetic.main.activity_show_message.*
 import org.jetbrains.anko.doAsync
+import szulc.magdalena.fitpost.mastodon.Authenticator
 
 /**
  * Skeleton of an Android Things activity.
@@ -49,8 +50,8 @@ class ShowMessage : Activity() {
                 MastodonClient.Builder("qoto.org", OkHttpClient.Builder(), Gson()).accessToken(accessToken).build()
 */
 
-            var username = "szulcmagdalena241d@gmail.com"//pref.getString("username_input","szulcmagdalena241d@gmail.com")
-            var password = "OnomatopejeA97!#"//pref.getString("password_input","OnomatopejeA97!#")
+            val username = "szulcmagdalena241d@gmail.com"//pref.getString("username_input","szulcmagdalena241d@gmail.com")
+            val password = "OnomatopejeA97!#"//pref.getString("password_input","OnomatopejeA97!#")
 
             val file = filesDir.absolutePath
             val client = Authenticator.appRegistrationIfNeeded("qoto.org",file+"/credl.xml",true,username,password)

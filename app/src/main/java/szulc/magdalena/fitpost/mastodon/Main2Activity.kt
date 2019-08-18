@@ -44,22 +44,22 @@ class Main2Activity : AppCompatActivity() {
         mSectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager)
 
         // Set up the ViewPager with the sections adapter.
-        container.adapter = mSectionsPagerAdapter
+        //container.adapter = mSectionsPagerAdapter
 
-        container.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabs))
-        tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(container))
+        //container.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabs))
+        //tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(container))
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
+       // fab.setOnClickListener { view ->
+       //     Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+       //         .setAction("Action", null).show()
+       // }
 
     }
 
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main2, menu)
+      //  menuInflater.inflate(R.menu.menu_main2, menu)
         return true
     }
 
@@ -98,12 +98,12 @@ class Main2Activity : AppCompatActivity() {
 
 
     fun sendMessage(view:View){
-        val edit = findViewById<EditText>(R.id.editText)
-        val message  = editText.text.toString()
-        UpdateIntentService.startActionSend(this,message)
+     //   val edit = findViewById<EditText>(R.id.editText)
+     //   val message  = editText.text.toString()
+     //   UpdateIntentService.startActionSend(this,message)
         //UpdateIntentService.startActionUpdate(this,message)
 
-        edit.text.clear()
+     //   edit.text.clear()
 
 
     }

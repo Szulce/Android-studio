@@ -27,14 +27,14 @@ class MainActivityOLD : AppCompatActivity() {
     private var position = 0
 
 
-    override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle?) {
-        super.onSaveInstanceState(outState, outPersistentState!!)
+    override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
+        super.onSaveInstanceState(outState, outPersistentState)
         outState.putInt("position",position)
     }
 
-    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
-        super.onRestoreInstanceState(savedInstanceState!!)
-        if(savedInstanceState?.getInt("position",0)!! >0){
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        if(savedInstanceState.getInt("position", 0) >0){
             recyclerView.layoutManager?.scrollToPosition(position)
 
         }
@@ -49,28 +49,28 @@ class MainActivityOLD : AppCompatActivity() {
         content = mutableListOf<MyStatus>()
         viewAdapter  = RecycleAdapter(content)
 
-        recyclerView = findViewById<RecyclerView>(R.id.recyclerView).apply {
-            setHasFixedSize(true)
-            layoutManager = viewManager
-            adapter = viewAdapter
+        //recyclerView = findViewById<RecyclerView>(R.id.recyclerView).apply {
+         //   setHasFixedSize(true)
+          //  layoutManager = viewManager
+           // adapter = viewAdapter
         }
 
-        recyclerView.addOnScrollListener(object:RecyclerView.OnScrollListener(){
+        //recyclerView.addOnScrollListener(object:RecyclerView.OnScrollListener(){
 
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-                if(newState == RecyclerView.SCROLL_STATE_IDLE){
-                    position = LinearLayoutManager(recyclerView.context).findFirstVisibleItemPosition()
-                }
-            }
+        //    override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+        //        super.onScrollStateChanged(recyclerView, newState)
+        //        if(newState == RecyclerView.SCROLL_STATE_IDLE){
+         //           position = LinearLayoutManager(recyclerView.context).findFirstVisibleItemPosition()
+         //       }
+         //   }
 
-        })
+        //})
 
 
-        swiperRefreshLayout.setOnRefreshListener {
-             UpdateTimeline()
+       // swiperRefreshLayout.setOnRefreshListener {
+        //     UpdateTimeline()
 
-        }
+       // }
 //        var pref = PreferenceManager.getDefaultSharedPreferences(this)
 //
 //        var username = pref.getString("username_input","szulcmagdalena241d@gmail.com")
@@ -81,12 +81,12 @@ class MainActivityOLD : AppCompatActivity() {
     }
 
     fun sendMessage(view:View){
-        val edit = findViewById<EditText>(R.id.editText)
-        val message  = editText.text.toString()
-        UpdateIntentService.startActionSend(this,message)
+        //val edit = findViewById<EditText>(R.id.editText)
+        //val message  = editText.text.toString()
+       // UpdateIntentService.startActionSend(this,message)
         //UpdateIntentService.startActionUpdate(this,message)
 
-        edit.text.clear()
+       // edit.text.clear()
 //        var pref = PreferenceManager.getDefaultSharedPreferences(this)
 //
 //        var username = pref.getString("username_input","szulcmagdalena241d@gmail.com")
@@ -101,39 +101,39 @@ class MainActivityOLD : AppCompatActivity() {
     }
 
     fun post(username:String,password:String,message:String):Unit{
-        doAsync{
+       // doAsync{
 
-            val file = filesDir.absolutePath
-            val client = Authenticator.appRegistrationIfNeeded("qoto.org",file+"/credl.xml",true,username,password)
-            val status = Statuses(client)
-            val r = status.postStatus(message,null,null,false,null, Status.Visibility.Private).execute()
-        }
+         //   val file = filesDir.absolutePath
+         //   val client = Authenticator.appRegistrationIfNeeded("qoto.org",file+"/credl.xml",true,username,password)
+         //   val status = Statuses(client)
+          //  val r = status.postStatus(message,null,null,false,null, Status.Visibility.Private).execute()
+     //   }
     }
-
+/*
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        val inflater = menuInflater
-        inflater.inflate(R.menu.menu_mastodon,menu)
+       // val inflater = menuInflater
+        //inflater.inflate(R.menu.menu_mastodon,menu)
         return true
-    }
-
+    }*/
+/*
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         return when (item.itemId){
 
             R.id.settingsButtoon -> {
-                val intent = Intent(this, SettingsActivity::class.java)
-                startActivity(intent)
+            //    val intent = Intent(this, SettingsActivity::class.java)
+          //      startActivity(intent)
                 true
             }
             R.id.aboutButton -> {
-                val intent = Intent(this,AboutActivity::class.java)
-                startActivity(intent)
+              //  val intent = Intent(this,AboutActivity::class.java)
+            //    startActivity(intent)
                 true
             }
-            else -> super.onOptionsItemSelected(item!!)
+           // else -> super.onOptionsItemSelected(item!!)
         }
     }
-
+*/
 //    fun dispplayStream(view:View){
 //        val intent = Intent(this,ShowStream::class.java)
 //        startActivity(intent)
@@ -163,7 +163,7 @@ class MainActivityOLD : AppCompatActivity() {
 //        }
 
     fun UpdateTimeline():Unit{
-        val db = this.database.readableDatabase
+    /*    val db = this.database.readableDatabase
         UpdateIntentService.startActionUpdate(this,"any")
 
 
@@ -180,6 +180,6 @@ class MainActivityOLD : AppCompatActivity() {
             }
         }
 
-    }
+    }*/
 }
 
