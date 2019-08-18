@@ -1,5 +1,6 @@
 package szulc.magdalena.fitpost
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
@@ -28,8 +29,8 @@ class MainActivity : AppCompatActivity() {
         val fab: FloatingActionButton = findViewById(R.id.fab)
 
         fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+            val formulaIntent = Intent(view.context,AddFormulaActivity::class.java)
+                startActivity(formulaIntent)
         }
 
         viewPager.addOnPageChangeListener(object :ViewPager.OnPageChangeListener {

@@ -10,7 +10,8 @@
     <string name="About">About</string>
     <string name="Settings">Settings</string>
     <string name="AppVersion" translatable="false">0.0.1</string>
-    <string name="socialmediaapp_powsta_a_w_2019_roku_w_ramach_zaj_prowadzonych_przez_umk" translatable="false">SocialMediaApp powstała w
+    <string name="socialmediaapp_powsta_a_w_2019_roku_w_ramach_zaj_prowadzonych_przez_umk" translatable="false">
+        SocialMediaApp powstała w
         2019 roku w ramach zajęć prowadzonych przez UMK
     </string>
     <string name="hint">hint</string>
@@ -22,4 +23,7 @@
     <string name="wednesday" translatable="false">Wednesday</string>
     <string name="home">HOME</string>
     <string name="local">LOCAL</string>
+    <string name="post_meal">POST MEAL</string>
+    <string name="back">back</string>
+    <string name="next">next</string>
 </resources>

@@ -14,4 +14,7 @@
     <string name="home">Strona Startowa</string>
     <string name="local">Lokalna</string>
     <string name="monday">Poniedziałek</string>
+    <string name="post_meal">POST MEAL</string>
+    <string name="back">back</string>
+    <string name="next">next</string>
 </resources>

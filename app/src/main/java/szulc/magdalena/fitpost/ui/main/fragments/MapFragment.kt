@@ -1,13 +1,11 @@
 package szulc.magdalena.fitpost.ui.main.fragments
 
 import android.app.Activity
-import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
@@ -37,7 +35,7 @@ class MapFragment : Fragment() {
 
     fun checkService(): Boolean {
 
-        var avaliable = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(viewOfFragment.context)
+        val avaliable = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(viewOfFragment.context)
 
         if (avaliable == ConnectionResult.SUCCESS){
             Log.i("MapFragment","Services are working")
@@ -50,9 +48,7 @@ class MapFragment : Fragment() {
           Log.w("MapFragment","Services connection result not successful")
          return false
 
-
     }
-
 
 
     companion object {
