@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent" android:layout_height="match_parent"
+        android:background="#C8A798"
+        tools:context=".TimerSetTimeActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:theme="@style/AppTheme.AppBarOverlay" android:background="#8E2E44">
+
+
+        <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_height="match_parent"
+                android:layout_width="?attr/actionBarSize"
+                android:background="#8E2E44"
+                app:popupTheme="@style/AppTheme.PopupOverlay"
+        />
+
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="64dp" app:srcCompat="@drawable/logo" android:id="@+id/imageView"
+                android:contentDescription="@string/app_name" android:scaleType="centerInside"
+                android:cropToPadding="false"/>
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <fragment android:id="@+id/timerSettingsFragment" android:name="szulc.magdalena.fitpost.TimerSetTimeActivity"
+              android:layout_width="match_parent" android:layout_height="match_parent"
+              app:layout_behavior="@string/appbar_scrolling_view_behavior"></fragment>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

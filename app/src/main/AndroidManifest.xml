@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="szulc.magdalena.fitpost">
+          xmlns:tools="http://schemas.android.com/tools" package="szulc.magdalena.fitpost">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
-            android:allowBackup="true"
             android:icon="@drawable/add_meal"
             android:label="@string/app_name"
             android:roundIcon="@drawable/add_meal"
             android:supportsRtl="true"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme.NoActionBar" tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".TimerSetTimeActivity">
+        </activity>
+
         <receiver
-                android:name=".Receivers.TimerNotificationReceiver"
+                android:name="receivers.TimerNotificationReceiver"
                 android:enabled="true"
                 android:exported="true">
             <intent-filter>
@@ -21,14 +25,34 @@
             </intent-filter>
         </receiver>
         <receiver
-                android:name=".Receivers.TimerExpiredReceiver"
+                android:name="receivers.TimerExpiredReceiver"
                 android:enabled="true"
                 android:exported="true">
+        </receiver>
+        <receiver android:name="mastodon.AppWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+            </intent-filter>
 
+            <meta-data
+                    android:name="android.appwidget.provider"
+                    android:resource="@xml/app_widget_info"/>
         </receiver>
 
+        <provider
+                android:name="providers.DataContentProvider"
+                android:authorities="szulc.magdalena.fitpost.mastodon.provider.DataContentProvider"
+                android:enabled="true"
+                android:exported="true">
+        </provider>
+
+        <service
+                android:name="services.UpdateIntentService"
+                android:exported="false">
+        </service>
+
         <activity
-                android:name=".MainActivity"
+                android:name=".MainActivityOLD"
                 android:label="@string/app_name"
                 android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -37,6 +61,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".mastodon.AboutActivity"/>
 
         <meta-data
                 android:name="preloaded_fonts"

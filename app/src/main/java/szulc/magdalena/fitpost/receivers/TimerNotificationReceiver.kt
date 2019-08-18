@@ -1,4 +1,4 @@
-package szulc.magdalena.fitpost.Receivers
+package szulc.magdalena.fitpost.receivers
 
 import android.content.BroadcastReceiver
 import android.content.Context

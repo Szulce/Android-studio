@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">FitPost</string>
     <string name="tab_text_1">Mapy</string>
     <string name="tab_text_2">Posty</string>
     <string name="tab_text_3">Ćwiczenia</string>
+    <string name="settings">Ustawienia</string>
+    <string name="username">nazwa użytkownika</string>
+    <string name="About">O aplikacji</string>
+    <string name="Settings">Ustawienia</string>
+    <string name="password">hasło</string>
+    <string name="add_widget">Dodaj widget</string>
+    <string name="appwidget_text">Przykład</string>
+    <string name="hint">podpowiedź</string>
+    <string name="home">Strona Startowa</string>
+    <string name="local">Lokalna</string>
+    <string name="monday">Poniedziałek</string>
 </resources>

@@ -8,15 +8,14 @@ import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.fragment_tab3.*
 import szulc.magdalena.fitpost.R
-import szulc.magdalena.fitpost.Receivers.TimerExpiredReceiver
+import szulc.magdalena.fitpost.receivers.TimerExpiredReceiver
+import szulc.magdalena.fitpost.TimerSetTimeActivity
 import util.NotificationUtil
 import util.PrefUtil
 import java.util.*
@@ -217,6 +216,20 @@ class TimerFragment : Fragment() {
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_timer,menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            R.id.action_settings -> {
+                val intent = Intent(viewOfFragment.context,TimerSetTimeActivity::class.java)
+                startActivity(intent)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
 
     companion object {
 

@@ -12,7 +12,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import szulc.magdalena.fitpost.AppConstants
 import szulc.magdalena.fitpost.R
-import szulc.magdalena.fitpost.Receivers.TimerNotificationReceiver
+import szulc.magdalena.fitpost.receivers.TimerNotificationReceiver
 import szulc.magdalena.fitpost.ui.main.fragments.TimerFragment
 import java.text.SimpleDateFormat
 import java.util.*

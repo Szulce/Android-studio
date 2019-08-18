@@ -14,6 +14,8 @@ class PrefUtil {
         private const val PREVIOUS_TIMER_LENGTH_ID = "szulc.magdalena.timer.previous_timer_length"
         private const val PREVIOUS_EXERCISE_ID = "szulc.magdalena.timer.exercise_id"
         private const val ALARMSET_TIME_ID = "szulc.magdalena.timer.background_time"
+        private  const val TIMER_LENGTH_ID = "szulc.magdalena.timer.timer_lenght"
+
 
         fun getTimerState(context: Context): TimerFragment.TimerStatus{
             val preferences = PreferenceManager.getDefaultSharedPreferences(context)
@@ -30,8 +32,9 @@ class PrefUtil {
         }
 
         fun getTimerLength(context: Context):Int{
-            //TODO
-            return 1
+            val preferences = PreferenceManager.getDefaultSharedPreferences(context)
+
+            return preferences.getInt(TIMER_LENGTH_ID,3)
         }
 
 
