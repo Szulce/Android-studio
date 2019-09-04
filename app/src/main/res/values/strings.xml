@@ -29,4 +29,5 @@
     <string name="market">market</string>
     <string name="gym">gym</string>
     <string name="restaurant">restaurant</string>
+    <string name="permision_denied">Permission Denied</string>
 </resources>

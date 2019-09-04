@@ -2,6 +2,7 @@ package szulc.magdalena.fitpost.ui.main.fragments
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Build
 import android.os.Bundle
@@ -10,6 +11,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
@@ -20,6 +24,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import szulc.magdalena.fitpost.R
+import java.util.jar.Manifest
 
 /**
  * Class to manage map fragment
@@ -52,13 +57,19 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
         //runtime permision
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            checkLocationPermission()
+            if (checkLocationPermission()) {
+                buildLocationRequest()
+                buildLocationCallBack()
+
+                fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(viewOfFragment.context)
+                fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper())
+            }
+        }else{
             buildLocationRequest()
             buildLocationCallBack()
 
-
             fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(viewOfFragment.context)
-            fusedLocationProviderClient.requestLocationUpdates(locationRequest,locationCallback, Looper.myLooper())
+            fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper())
         }
 
         return viewOfFragment
@@ -81,7 +92,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
                 //camera
                 nMap.moveCamera(CameraUpdateFactory.newLatLng(latLng))
-                nMap.animateCamera(CameraUpdateFactory.zoomBy(11f))
+                nMap.animateCamera(CameraUpdateFactory.zoomTo(11f))
 
             }
         }
@@ -97,9 +108,31 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
     }
 
-    private fun checkLocationPermission() {
+    private fun checkLocationPermission() :Boolean{
 
+        if(ContextCompat.checkSelfPermission(viewOfFragment.context,android.Manifest.permission.ACCESS_FINE_LOCATION)!=PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(
+                    viewOfFragment.context as Activity,
+                    android.Manifest.permission.ACCESS_FINE_LOCATION
+                )
+            ) {
+                ActivityCompat.requestPermissions(
+                    viewOfFragment.context as Activity,
+                    arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                    MY_PERMISSION_CODE
+                )
+            } else {
+                ActivityCompat.requestPermissions(
+                    viewOfFragment.context as Activity,
+                    arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                    MY_PERMISSION_CODE
+                )
+            }
 
+            return false
+
+        }
+        return true
     }
 
     fun checkService(): Boolean {
@@ -127,10 +160,50 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         nMap.addMarker(MarkerOptions().position(sydney).title("Marker in SYNDEY"))
         nMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
 
+            //init service
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if(ContextCompat.checkSelfPermission(viewOfFragment.context,android.Manifest.permission.ACCESS_FINE_LOCATION)==PackageManager.PERMISSION_GRANTED){
+                nMap!!.isMyLocationEnabled = true
+            }
+        }else{
+            nMap!!.isMyLocationEnabled = true
+        }
+
+        //enable zoom control
+        nMap.uiSettings.isZoomControlsEnabled = true
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+      when(requestCode){
+          MY_PERMISSION_CODE->{
+              if(grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+              {
+                  if(ContextCompat.checkSelfPermission(viewOfFragment.context,android.Manifest.permission.ACCESS_FINE_LOCATION)!=PackageManager.PERMISSION_GRANTED){
+                      if(checkLocationPermission()){
+                          buildLocationRequest()
+                          buildLocationCallBack()
+
+                          fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(viewOfFragment.context)
+                          fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper())
+                          nMap!!.isMyLocationEnabled = true
+                      }
+                  }
+              }else{
+                  Toast.makeText(viewOfFragment.context,getString(R.string.permision_denied),Toast.LENGTH_SHORT).show()
+              }
+          }
+      }
+    }
+
+    override fun onStop() {
+        fusedLocationProviderClient.removeLocationUpdates(locationCallback)
+        super.onStop()
     }
 
 
     companion object {
+
+        private val MY_PERMISSION_CODE:Int = 1000
 
         @JvmStatic
         fun newInstance(sectionNumber: Int): MapFragment {
