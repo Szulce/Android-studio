@@ -17,4 +17,6 @@
     <string name="post_meal">POST MEAL</string>
     <string name="back">back</string>
     <string name="next">next</string>
+    <string name="market">market</string>
+    <string name="gym">gym</string>
 </resources>
