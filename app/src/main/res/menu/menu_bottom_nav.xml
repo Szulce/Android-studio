@@ -9,7 +9,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
     app:showAsAction="ifRoom"/>
 
     <item
-            android:id="@+id/action_school"
+            android:id="@+id/action_gym"
             android:enabled="true"
             android:title="@string/gym"
             android:icon="@drawable/ic_action_gym"

@@ -23,6 +23,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import kotlinx.android.synthetic.main.fragment_tab1.*
 import szulc.magdalena.fitpost.R
 import java.util.jar.Manifest
 
@@ -72,7 +73,19 @@ class MapFragment : Fragment(), OnMapReadyCallback {
             fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper())
         }
 
+        botton_navigation_view.setOnNavigationItemReselectedListerer{ item ->
+            when(item.itemId){
+                R.id.action_restaurant -> nearByPlace("restaurant")
+                R.id.action_gym-> nearByPlace("gym")
+                R.id.action_market -> nearByPlace("market")
+            }
+        }
+
         return viewOfFragment
+    }
+
+    private fun nearByPlace(typePlace: String) {
+
     }
 
     private fun buildLocationCallBack() {
