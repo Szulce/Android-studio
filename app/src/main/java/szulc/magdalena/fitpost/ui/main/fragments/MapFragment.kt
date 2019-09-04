@@ -1,9 +1,11 @@
 package szulc.magdalena.fitpost.ui.main.fragments
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.location.Location
 import android.os.Build
 import android.os.Bundle
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -11,10 +13,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationCallback
-import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.*
 import com.google.android.gms.maps.*
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
@@ -50,24 +51,54 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         mapFragment.getMapAsync(this)
 
         //runtime permision
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkLocationPermission()
             buildLocationRequest()
             buildLocationCallBack()
+
+
+            fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(viewOfFragment.context)
+            fusedLocationProviderClient.requestLocationUpdates(locationRequest,locationCallback, Looper.myLooper())
         }
 
         return viewOfFragment
     }
 
     private fun buildLocationCallBack() {
-        
+        locationCallback = object:LocationCallback(){
+            override fun onLocationResult(p0: LocationResult?) {
+                mLastLocation = p0!!.lastLocation //p0.locations.get(p0.locations.size-1)
+                if(mMarer != null){
+                    mMarer!!.remove()
+                }
+                latitude = mLastLocation.latitude
+                longitude = mLastLocation.longitude
+
+                val latLng = LatLng(latitude,longitude)
+                val markerOptions = MarkerOptions().position(latLng).title("Your position").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+
+                mMarer = nMap!!.addMarker(markerOptions)
+
+                //camera
+                nMap.moveCamera(CameraUpdateFactory.newLatLng(latLng))
+                nMap.animateCamera(CameraUpdateFactory.zoomBy(11f))
+
+            }
+        }
     }
 
+    @SuppressLint("RestrictedApi")
     private fun buildLocationRequest() {
+        locationRequest = LocationRequest()
+        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        locationRequest.interval = 5000
+        locationRequest.fastestInterval = 3000
+        locationRequest.smallestDisplacement = 10f
 
     }
 
     private fun checkLocationPermission() {
+
 
     }
 
