@@ -3,6 +3,7 @@ package szulc.magdalena.fitpost.ui.main.fragments
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.location.Location
 import android.os.Build
 import android.os.Bundle
@@ -24,8 +25,15 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.fragment_tab1.*
+import retrofit2.Call
+import retrofit2.Response
 import szulc.magdalena.fitpost.R
+import szulc.magdalena.fitpost.remote.IGoogleAPIService
+import szulc.magdalena.fitpost.remote.common.Common
+import szulc.magdalena.fitpost.remote.model.MyPlaces
+import java.lang.StringBuilder
 import java.util.jar.Manifest
+import javax.security.auth.callback.Callback
 
 /**
  * Class to manage map fragment
@@ -44,6 +52,8 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     lateinit var locationRequest: LocationRequest
     lateinit var locationCallback: LocationCallback
     private lateinit var viewOfFragment: View
+    lateinit var mService:IGoogleAPIService
+    internal  lateinit var  currentPlace:MyPlaces
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         viewOfFragment = inflater.inflate(R.layout.fragment_tab1, container, false)
@@ -55,6 +65,9 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         val mapFragment = fragmentManager?.findFragmentById(R.id.map) as SupportMapFragment
 
         mapFragment.getMapAsync(this)
+
+        //init service
+        mService = Common.googleApiService
 
         //runtime permision
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -73,18 +86,74 @@ class MapFragment : Fragment(), OnMapReadyCallback {
             fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper())
         }
 
-        botton_navigation_view.setOnNavigationItemReselectedListerer{ item ->
+        botton_navigation_view.setOnNavigationItemSelectedListener { item ->
             when(item.itemId){
                 R.id.action_restaurant -> nearByPlace("restaurant")
                 R.id.action_gym-> nearByPlace("gym")
                 R.id.action_market -> nearByPlace("market")
             }
+            true
         }
 
         return viewOfFragment
     }
 
     private fun nearByPlace(typePlace: String) {
+        //clear markers on map
+        nMap.clear()
+        //request
+        val url = getUrl(latitude,longitude,typePlace)
+
+                        mService.getNearbyPlaces(url).enqueue(object : retrofit2.Callback<MyPlaces> {
+                            override fun onResponse(call: Call<MyPlaces>?,response: Response<MyPlaces>?){
+                                currentPlace = response!!.body()
+                                if(response!!.isSuccessful){
+                                        for(i in 0 until response!!.body()!!.results!!.size){
+                                            val markerOptions=MarkerOptions()
+                                            val googlePlace = response.body()!!.results!![i]
+                                            val lat = googlePlace.geometry!!.locaion!!.lat
+                                            val lng = googlePlace.geometry!!.locaion!!.lng
+                                            val placeName = googlePlace.name
+                                            val latLng = LatLng(lat,lng)
+
+                                            markerOptions.position(latLng)
+                                            markerOptions.title(placeName)
+
+                                            if(typePlace.equals("restaurant")){
+                                                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.id.action_restaurant))
+                                            }else if(typePlace.equals("gym")){
+                                                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.id.action_gym))
+                                            }else  if(typePlace.equals("market")){
+                                                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.id.action_market))
+                                            }else{
+                                                markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
+                                            }
+
+                                            markerOptions.snippet(i.toString()) //index for marker
+
+                                            //add marker on map
+                                            nMap!!.addMarker(markerOptions)
+                                        }
+                                    //move camera
+                                    nMap!!.moveCamera(CameraUpdateFactory.newLatLng(LatLng(latitude,longitude)))
+                                    nMap!!.animateCamera(CameraUpdateFactory.zoomTo(11f))
+                                }
+                            }
+                            override  fun onFailure(call:Call<MyPlaces>?,t:Throwable?){
+                                Toast.makeText(viewOfFragment.context,""+t!!.message,Toast.LENGTH_SHORT).show()
+                            }
+                        })
+    }
+
+    private fun getUrl(latitude: Double, longitude: Double, typePlace: String): String {
+
+        val googlePlaceUrl = StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json")
+        googlePlaceUrl.append("?location=$latitude,$longitude")
+        googlePlaceUrl.append("&radius=10000")//10km
+        googlePlaceUrl.append("&type=$typePlace")
+        googlePlaceUrl.append("&key=AIzaSyBBpxR0F5EW3BQRz7fWJr5BlAx8a_2PhoY")
+        Log.d("URL_DEBUG",googlePlaceUrl.toString())
+        return  googlePlaceUrl.toString()
 
     }
 
