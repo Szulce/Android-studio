@@ -16,8 +16,8 @@ import kotlinx.android.synthetic.main.fragment_tab3.*
 import szulc.magdalena.fitpost.R
 import szulc.magdalena.fitpost.receivers.TimerExpiredReceiver
 import szulc.magdalena.fitpost.TimerSetTimeActivity
-import util.NotificationUtil
-import util.PrefUtil
+import szulc.magdalena.fitpost.util.NotificationUtil
+import szulc.magdalena.fitpost.util.PrefUtil
 import java.util.*
 
 /**
@@ -32,7 +32,7 @@ class TimerFragment : Fragment() {
 
     private lateinit var timer: CountDownTimer
     private lateinit var viewOfFragment: View
-    private val exerciseLength = longArrayOf(30L, 60L, 120L, 60L, 30L)//in seconds
+    private val exerciseLength = longArrayOf(30L, 60L, 120L, 60L, 30L,30L,60L)//in seconds
     private var exerciseId = 0
     private var timerActualStatus = TimerStatus.Stop
     private var timeRemaining = 0L

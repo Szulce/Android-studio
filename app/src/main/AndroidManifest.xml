@@ -6,6 +6,13 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="com.mapgenius.googlemaps.permission.MAPS_RECEIVE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.ACCESS_GPS" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION" />
+
 
     <application
             android:icon="@drawable/add_meal"
@@ -46,19 +53,19 @@
         </receiver>
 
         <provider
-                android:name="providers.DataContentProvider"
-                android:authorities="szulc.magdalena.fitpost.mastodon.provider.DataContentProvider"
+                android:name="szulc.magdalena.fitpost.providers.DataContentProvider"
+                android:authorities="szulc.magdalena.fitpost"
                 android:enabled="true"
                 android:exported="true">
         </provider>
 
         <service
-                android:name="services.UpdateIntentService"
+                android:name="szulc.magdalena.fitpost.services.UpdateIntentService"
                 android:exported="false">
         </service>
 
         <activity
-                android:name=".MainActivityOLD"
+                android:name=".MainActivity"
                 android:label="@string/app_name"
                 android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -70,11 +77,16 @@
         <activity android:name=".mastodon.AboutActivity"/>
         <activity android:name=".mastodon.Main2Activity"/>
         <activity android:name=".mastodon.MainActivityOLD"/>
-        <activity android:name=".MainActivity"/>
 
         <meta-data
                 android:name="preloaded_fonts"
                 android:resource="@array/preloaded_fonts"/>
+
+        <meta-data android:name="com.google.android.geo.API_KEY"
+                   android:value="@string/google_maps_key" />
+        <meta-data
+                android:name="com.google.android.gms.version"
+                android:value="@integer/google_play_services_version" />
     </application>
 
 </manifest>

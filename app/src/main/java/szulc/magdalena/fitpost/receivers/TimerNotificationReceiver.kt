@@ -7,8 +7,8 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import szulc.magdalena.fitpost.AppConstants
 import szulc.magdalena.fitpost.ui.main.fragments.TimerFragment
-import util.NotificationUtil
-import util.PrefUtil
+import szulc.magdalena.fitpost.util.NotificationUtil
+import szulc.magdalena.fitpost.util.PrefUtil
 
 class TimerNotificationReceiver : BroadcastReceiver() {
 

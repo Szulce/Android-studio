@@ -1,4 +1,4 @@
-package util
+package szulc.magdalena.fitpost.util
 
 import android.content.Context
 import android.preference.PreferenceManager

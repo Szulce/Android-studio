@@ -1,4 +1,4 @@
-package util
+package szulc.magdalena.fitpost.util
 
 import android.annotation.TargetApi
 import android.app.*

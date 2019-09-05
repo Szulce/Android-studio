@@ -30,4 +30,6 @@
     <string name="gym">gym</string>
     <string name="restaurant">restaurant</string>
     <string name="permision_denied">Permission Denied</string>
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyBBpxR0F5EW3BQRz7fWJr5BlAx8a_2PhoY</string>
+    <string name="browserKey" translatable="false">AIzaSyBcc8ImqvU5Cg3bz2n5k6DiBaoOvhJ1fL4</string>
 </resources>
