@@ -4,6 +4,7 @@ package szulc.magdalena.fitpost.ui.main.fragments
 
 import android.Manifest
 import android.app.Activity
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Build
@@ -14,6 +15,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -31,7 +33,9 @@ import kotlinx.android.synthetic.main.fragment_tab1.view.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import szulc.magdalena.fitpost.MainActivity
 import szulc.magdalena.fitpost.R
+import szulc.magdalena.fitpost.ViewPlaceActivity
 import szulc.magdalena.fitpost.remote.IGoogleAPIService
 import szulc.magdalena.fitpost.remote.common.Common
 import szulc.magdalena.fitpost.remote.model.MyPlaces
@@ -40,7 +44,7 @@ import szulc.magdalena.fitpost.remote.model.MyPlaces
  * Class to manage map fragment
  * */
 
-class MapFragment : SupportMapFragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
+class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
 
     private lateinit var nMap: GoogleMap
@@ -61,9 +65,8 @@ class MapFragment : SupportMapFragment(), OnMapReadyCallback, GoogleMap.OnMarker
 
         Log.i("MAP", "Map activity Tab started.")
 
-        //MapsInitializer.initialize(viewOfFragment.context)
 
-        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+        val mapFragment = childFragmentManager.findFragmentById(R.id.google_map_fragment) as SupportMapFragment
 
         mapFragment.getMapAsync(this)
 
@@ -101,33 +104,38 @@ class MapFragment : SupportMapFragment(), OnMapReadyCallback, GoogleMap.OnMarker
         return viewOfFragment
     }
 
+    @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
     override fun onMapReady(googleMap: GoogleMap) {
         Log.d("MAP", "onMapReady")
         nMap = googleMap
 
 
-        //todo do usuniecia po teście
-        val sydney = LatLng(-34.0, 151.0)
-        nMap.addMarker(MarkerOptions().position(sydney).title("Marker in SYNDEY"))
-        nMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
-
-
-//        //init service
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//            if (ContextCompat.checkSelfPermission(
-//                    viewOfFragment.context,
-//                    Manifest.permission.ACCESS_FINE_LOCATION
-//                ) == PackageManager.PERMISSION_GRANTED
-//            ) {
-//                nMap.isMyLocationEnabled = true
-//            }
-//        } else {
-//            nMap.isMyLocationEnabled = true
-//        }
+        //init service
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ContextCompat.checkSelfPermission(
+                    viewOfFragment.context,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ) == PackageManager.PERMISSION_GRANTED
+            ) {
+                nMap.isMyLocationEnabled = true
+            }
+        } else {
+            nMap.isMyLocationEnabled = true
+        }
+        //event click on marker
+        nMap!!.setOnMarkerClickListener { marker ->
+            //user select marker get resutl
+            Common.currentResult = currentPlace!!.results!![Integer.parseInt(marker.snippet)]
+            val intent = Intent(this@MapFragment.context,ViewPlaceActivity::class.java)
+            activity?.startActivity(intent)
+            true
+        }
 
         //enable zoom control
         nMap.uiSettings.isZoomControlsEnabled = true
     }
+
+
 
     private fun nearByPlace(typePlace: String) {
             //clear markers on map
@@ -150,10 +158,10 @@ class MapFragment : SupportMapFragment(), OnMapReadyCallback, GoogleMap.OnMarker
                             markerOptions.position(latLng)
                             markerOptions.title(placeName)
 
-                            when {
-                                typePlace.equals("restaurant") -> markerOptions.icon(BitmapDescriptorFactory.fromResource(R.id.action_restaurant))
-                                typePlace.equals("gym") -> markerOptions.icon(BitmapDescriptorFactory.fromResource(R.id.action_gym))
-                                typePlace.equals("market") -> markerOptions.icon(BitmapDescriptorFactory.fromResource(R.id.action_market))
+                            when (typePlace) {
+                                "restaurant" -> markerOptions.icon(BitmapDescriptorFactory.fromResource(R.id.action_restaurant))
+                                "gym" -> markerOptions.icon(BitmapDescriptorFactory.fromResource(R.id.action_gym))
+                                "market" -> markerOptions.icon(BitmapDescriptorFactory.fromResource(R.id.action_market))
                                 else -> markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
                             }
 

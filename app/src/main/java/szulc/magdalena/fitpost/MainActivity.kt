@@ -50,8 +50,7 @@ class MainActivity : AppCompatActivity() {
 
 
         })
-
-       // viewPager?.setCurrentItem(1,false)
+         viewPager?.setCurrentItem(1,false)
 
     }
 
