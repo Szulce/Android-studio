@@ -20,4 +20,5 @@
     <string name="market">market</string>
     <string name="gym">gym</string>
     <string name="permision_denied">Permission Denied</string>
+    <string name="show_on_map">Show on Map</string>
 </resources>
