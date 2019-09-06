@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"
-          package="szulc.magdalena.fitpost">
-
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
+        xmlns:tools="http://schemas.android.com/tools"
+        package="szulc.magdalena.fitpost">
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the 'MyLocation' functionality.
+    -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="com.mapgenius.googlemaps.permission.MAPS_RECEIVE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
     <uses-permission android:name="android.permission.ACCESS_GPS" />
     <uses-permission android:name="android.permission.ACCESS_LOCATION" />
-
 
     <application
             android:icon="@drawable/add_meal"
@@ -21,69 +24,74 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme.NoActionBar"
             tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".AddFormulaActivity">
-        </activity>
-        <activity android:name=".TimerSetTimeActivity">
-        </activity>
+        <activity android:name=".ViewPlaceActivity"></activity>
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/.
+        -->
+        <meta-data
+                android:name="com.google.android.geo.API_KEY"
+                android:value="@string/google_maps_key" />
+
+        <activity android:name=".AddFormulaActivity" />
+        <activity android:name=".TimerSetTimeActivity" />
 
         <receiver
                 android:name="receivers.TimerNotificationReceiver"
                 android:enabled="true"
                 android:exported="true">
             <intent-filter>
-                <action android:name="stop"/>
-                <action android:name="start"/>
-                <action android:name="pause"/>
-                <action android:name="resume"/>
+                <action android:name="stop" />
+                <action android:name="start" />
+                <action android:name="pause" />
+                <action android:name="resume" />
             </intent-filter>
         </receiver>
         <receiver
                 android:name="receivers.TimerExpiredReceiver"
                 android:enabled="true"
-                android:exported="true">
-        </receiver>
+                android:exported="true" />
         <receiver android:name="mastodon.AppWidget">
             <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
 
             <meta-data
                     android:name="android.appwidget.provider"
-                    android:resource="@xml/app_widget_info"/>
+                    android:resource="@xml/app_widget_info" />
         </receiver>
 
         <provider
-                android:name="szulc.magdalena.fitpost.providers.DataContentProvider"
+                android:name=".providers.DataContentProvider"
                 android:authorities="szulc.magdalena.fitpost"
                 android:enabled="true"
-                android:exported="true">
-        </provider>
+                android:exported="true" />
 
         <service
-                android:name="szulc.magdalena.fitpost.services.UpdateIntentService"
-                android:exported="false">
-        </service>
+                android:name=".services.UpdateIntentService"
+                android:exported="false" />
 
         <activity
                 android:name=".MainActivity"
                 android:label="@string/app_name"
                 android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".mastodon.AboutActivity"/>
-        <activity android:name=".mastodon.Main2Activity"/>
-        <activity android:name=".mastodon.MainActivityOLD"/>
+        <activity android:name=".mastodon.AboutActivity" />
+        <activity android:name=".mastodon.Main2Activity" />
+        <activity android:name=".mastodon.MainActivityOLD" />
 
         <meta-data
                 android:name="preloaded_fonts"
-                android:resource="@array/preloaded_fonts"/>
-
-        <meta-data android:name="com.google.android.geo.API_KEY"
-                   android:value="@string/google_maps_key" />
+                android:resource="@array/preloaded_fonts" />
         <meta-data
                 android:name="com.google.android.gms.version"
                 android:value="@integer/google_play_services_version" />

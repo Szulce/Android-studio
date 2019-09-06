@@ -1,8 +1,8 @@
 package szulc.magdalena.fitpost.remote
 
-
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+
 
 object RetrofitClient {
     private var retrofit: Retrofit?=null

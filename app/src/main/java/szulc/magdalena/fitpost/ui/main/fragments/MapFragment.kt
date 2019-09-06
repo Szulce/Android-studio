@@ -14,8 +14,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -61,10 +63,9 @@ class MapFragment : SupportMapFragment(), OnMapReadyCallback, GoogleMap.OnMarker
 
         //MapsInitializer.initialize(viewOfFragment.context)
 
-        //val mapFragment = fragmentManager.findViewById(R.id.map) as SupportMapView?
-       // Log.d("MAP","mapFragment"+mapFragment.toString()+" "+this.activity.toString())
+        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
 
-        getMapAsync(this)
+        mapFragment.getMapAsync(this)
 
         //init service
         mService = Common.googleApiService
@@ -106,23 +107,23 @@ class MapFragment : SupportMapFragment(), OnMapReadyCallback, GoogleMap.OnMarker
 
 
         //todo do usuniecia po teście
-//        val sydney = LatLng(-34.0, 151.0)
-//        nMap.addMarker(MarkerOptions().position(sydney).title("Marker in SYNDEY"))
-//        nMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        val sydney = LatLng(-34.0, 151.0)
+        nMap.addMarker(MarkerOptions().position(sydney).title("Marker in SYNDEY"))
+        nMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
 
 
 //        //init service
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ContextCompat.checkSelfPermission(
-                    viewOfFragment.context,
-                    Manifest.permission.ACCESS_FINE_LOCATION
-                ) == PackageManager.PERMISSION_GRANTED
-            ) {
-                nMap.isMyLocationEnabled = true
-            }
-        } else {
-            nMap.isMyLocationEnabled = true
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//            if (ContextCompat.checkSelfPermission(
+//                    viewOfFragment.context,
+//                    Manifest.permission.ACCESS_FINE_LOCATION
+//                ) == PackageManager.PERMISSION_GRANTED
+//            ) {
+//                nMap.isMyLocationEnabled = true
+//            }
+//        } else {
+//            nMap.isMyLocationEnabled = true
+//        }
 
         //enable zoom control
         nMap.uiSettings.isZoomControlsEnabled = true
@@ -136,9 +137,9 @@ class MapFragment : SupportMapFragment(), OnMapReadyCallback, GoogleMap.OnMarker
 
             mService.getNearbyPlaces(url).enqueue(object : Callback<MyPlaces> {
                 override fun onResponse(call: Call<MyPlaces>?, response: Response<MyPlaces>?) {
-                    currentPlace = response!!.body()
+                    currentPlace = response?.body()!!
                     if (response.isSuccessful) {
-                        for (i in 0 until response.body()!!.results!!.size) {
+                        for (i in response.body()!!.results!!.indices) {
                             val markerOptions = MarkerOptions()
                             val googlePlace = response.body()!!.results!![i]
                             val lat = googlePlace.geometry!!.locaion!!.lat
@@ -149,24 +150,22 @@ class MapFragment : SupportMapFragment(), OnMapReadyCallback, GoogleMap.OnMarker
                             markerOptions.position(latLng)
                             markerOptions.title(placeName)
 
-                            if (typePlace.equals("restaurant")) {
-                                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.id.action_restaurant))
-                            } else if (typePlace.equals("gym")) {
-                                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.id.action_gym))
-                            } else if (typePlace.equals("market")) {
-                                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.id.action_market))
-                            } else {
-                                markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
+                            when {
+                                typePlace.equals("restaurant") -> markerOptions.icon(BitmapDescriptorFactory.fromResource(R.id.action_restaurant))
+                                typePlace.equals("gym") -> markerOptions.icon(BitmapDescriptorFactory.fromResource(R.id.action_gym))
+                                typePlace.equals("market") -> markerOptions.icon(BitmapDescriptorFactory.fromResource(R.id.action_market))
+                                else -> markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
                             }
 
                             markerOptions.snippet(i.toString()) //index for marker
 
                             //add marker on map
                             nMap.addMarker(markerOptions)
+                            //move camera
+                            nMap.moveCamera(CameraUpdateFactory.newLatLng(LatLng(latitude, longitude)))
+                            nMap.animateCamera(CameraUpdateFactory.zoomTo(15f))
                         }
-                        //move camera
-                        nMap.moveCamera(CameraUpdateFactory.newLatLng(LatLng(latitude, longitude)))
-                        nMap.animateCamera(CameraUpdateFactory.zoomTo(11f))
+
                     }
                 }
 
