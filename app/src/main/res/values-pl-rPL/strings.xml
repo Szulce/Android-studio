@@ -28,4 +28,6 @@
     <string name="restaurant">restauracja</string>
     <string name="title_activity_maps">Mapa</string>
     <string name="title_activity_view_directions">Mapa</string>
+    <string name="your_position">Your position</string>
+    <string name="please_wait">Please wait</string>
 </resources>

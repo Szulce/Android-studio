@@ -39,4 +39,6 @@
     <string name="place_name">Place name</string>
     <string name="place_adress">Place Adress</string>
     <string name="open">Open :</string>
+    <string name="your_position">Your position</string>
+    <string name="please_wait">Please wait</string>
 </resources>

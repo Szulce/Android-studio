@@ -34,6 +34,11 @@ class ViewPlaceActivity : AppCompatActivity() {
             val mapIntent = Intent(Intent.ACTION_VIEW, Uri.parse(mPlace!!.result!!.url))
             startActivity(mapIntent)
         }
+        btn_show_direction.setOnClickListener {
+            //openMapIntent to view
+            val mapDirectionsIntent = Intent(this@ViewPlaceActivity,ViewDirectionsActivity::class.java)
+            startActivity(mapDirectionsIntent)
+        }
         //load photo
         if (Common.currentResult!!.photos != null && Common.currentResult!!.photos!!.isNotEmpty()) {
             Picasso.get()//.with(this)

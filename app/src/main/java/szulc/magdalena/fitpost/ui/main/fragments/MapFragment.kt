@@ -124,10 +124,12 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         //event click on marker
         nMap!!.setOnMarkerClickListener { marker ->
             //user select marker get resutl
-            Common.currentResult = currentPlace!!.results!![Integer.parseInt(marker.snippet)]
-            val intent = Intent(this@MapFragment.context,ViewPlaceActivity::class.java)
-            activity?.startActivity(intent)
-            true
+            if (marker.snippet != null) {
+                Common.currentResult = currentPlace!!.results!![Integer.parseInt(marker.snippet)]
+                val intent = Intent(this@MapFragment.context, ViewPlaceActivity::class.java)
+                activity?.startActivity(intent)
+            }
+                true
         }
 
         //enable zoom control

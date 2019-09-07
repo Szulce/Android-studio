@@ -26,6 +26,9 @@ android {
             exclude 'META-INF/rxjava.properties'
         }
     }
+    testOptions {
+        unitTests.includeAndroidResources = true
+    }
 
     dependencies {
         implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -78,6 +81,9 @@ android {
         implementation 'android.arch.navigation:navigation-fragment:1.0.0'
         implementation 'com.squareup.retrofit2:retrofit:2.4.0'
         implementation 'com.squareup.retrofit2:converter-gson:2.0.0'
+        //directions
+        implementation 'com.squareup.retrofit2:converter-scalars:2.0.0'
+        implementation 'com.github.d-max:spots-dialog:0.7@aar'
         implementation 'com.squareup.retrofit2:adapter-rxjava:2.0.0'
         implementation 'com.squareup.picasso:picasso:2.71828'
         //noinspection GradleCompatible
@@ -86,6 +92,14 @@ android {
         implementation 'androidx.fragment:fragment-ktx:1.1.0'
         implementation 'com.google.android.gms:play-services-maps:17.0.0'
         //implementation 'androidx.appcompat:appcompat:1.1.0'
+
+        //tests
+        // Required -- JUnit 4 framework
+        testImplementation 'junit:junit:4.12'
+        // Optional -- Robolectric environment
+        testImplementation 'androidx.test:core:1.2.0'
+        // Optional -- Mockito framework
+        testImplementation 'org.mockito:mockito-core:1.10.19'
     }
 
 }
