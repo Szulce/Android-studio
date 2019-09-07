@@ -44,8 +44,7 @@ import szulc.magdalena.fitpost.remote.model.MyPlaces
  * Class to manage map fragment
  * */
 
-class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
-
+class MapFragment : Fragment(), OnMapReadyCallback {
 
     private lateinit var nMap: GoogleMap
     private var latitude: Double = 0.toDouble()
@@ -96,7 +95,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
             when (item.itemId) {
                 R.id.action_restaurant -> nearByPlace("restaurant")
                 R.id.action_gym -> nearByPlace("gym")
-                R.id.action_market -> nearByPlace("market")
+                R.id.action_market -> nearByPlace("supermarket")
             }
             true
         }
@@ -145,13 +144,15 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
 
             mService.getNearbyPlaces(url).enqueue(object : Callback<MyPlaces> {
                 override fun onResponse(call: Call<MyPlaces>?, response: Response<MyPlaces>?) {
+                    Log.d("MAP","Response receive")
                     currentPlace = response?.body()!!
                     if (response.isSuccessful) {
-                        for (i in response.body()!!.results!!.indices) {
+                        Log.d("MAP","Response successfull:"+response.body()!!.status+" "+response.body()!!.results!!.size)
+                        for (i in 0 until  response.body()!!.results!!.size) {
                             val markerOptions = MarkerOptions()
                             val googlePlace = response.body()!!.results!![i]
-                            val lat = googlePlace.geometry!!.locaion!!.lat
-                            val lng = googlePlace.geometry!!.locaion!!.lng
+                            val lat = googlePlace.geometry!!.location!!.lat
+                            val lng = googlePlace.geometry!!.location!!.lng
                             val placeName = googlePlace.name
                             val latLng = LatLng(lat, lng)
 
@@ -159,18 +160,18 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
                             markerOptions.title(placeName)
 
                             when (typePlace) {
-                                "restaurant" -> markerOptions.icon(BitmapDescriptorFactory.fromResource(R.id.action_restaurant))
-                                "gym" -> markerOptions.icon(BitmapDescriptorFactory.fromResource(R.id.action_gym))
-                                "market" -> markerOptions.icon(BitmapDescriptorFactory.fromResource(R.id.action_market))
+                                "restaurant" -> markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_action_restaurant))
+                                "gym" -> markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_action_gym))
+                                "supermarket" -> markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_action_market))
                                 else -> markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
                             }
 
                             markerOptions.snippet(i.toString()) //index for marker
-
+                            Log.d("MAP", "index$i")
                             //add marker on map
                             nMap.addMarker(markerOptions)
                             //move camera
-                            nMap.moveCamera(CameraUpdateFactory.newLatLng(LatLng(latitude, longitude)))
+                            nMap.moveCamera(CameraUpdateFactory.newLatLng(latLng))
                             nMap.animateCamera(CameraUpdateFactory.zoomTo(15f))
                         }
 
@@ -301,9 +302,6 @@ class MapFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListe
         super.onStop()
     }
 
-    override fun onMarkerClick(p0: Marker?): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 
     companion object {
 

@@ -14,11 +14,18 @@
     <string name="home">Strona Startowa</string>
     <string name="local">Lokalna</string>
     <string name="monday">Poniedziałek</string>
-    <string name="post_meal">POST MEAL</string>
-    <string name="back">back</string>
-    <string name="next">next</string>
+    <string name="post_meal">Dodaj Posta</string>
+    <string name="back">wróć</string>
+    <string name="next">dalej</string>
     <string name="market">market</string>
-    <string name="gym">gym</string>
-    <string name="permision_denied">Permission Denied</string>
-    <string name="show_on_map">Show on Map</string>
+    <string name="gym">siłownia</string>
+    <string name="permision_denied">Dostęp wzbroniony</string>
+    <string name="show_on_map">Pokaż na mapie</string>
+    <string name="show_direction">Pokaż trasę</string>
+    <string name="place_name">Nazwa miejsca</string>
+    <string name="place_adress">Adres miejsca</string>
+    <string name="open">Otwarte :</string>
+    <string name="restaurant">restauracja</string>
+    <string name="title_activity_maps">Mapa</string>
+    <string name="title_activity_view_directions">Mapa</string>
 </resources>

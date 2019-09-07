@@ -34,4 +34,9 @@
     <string name="browserKey" translatable="false">AIzaSyBcc8ImqvU5Cg3bz2n5k6DiBaoOvhJ1fL4</string>
     <string name="title_activity_maps">Map</string>
     <string name="show_on_map">Show on Map</string>
+    <string name="title_activity_view_directions">Map</string>
+    <string name="show_direction">Show direction</string>
+    <string name="place_name">Place name</string>
+    <string name="place_adress">Place Adress</string>
+    <string name="open">Open :</string>
 </resources>

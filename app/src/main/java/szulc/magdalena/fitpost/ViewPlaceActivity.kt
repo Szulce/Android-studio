@@ -3,6 +3,7 @@ package szulc.magdalena.fitpost
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -40,15 +41,16 @@ class ViewPlaceActivity : AppCompatActivity() {
                 .into(photo)
         }
         //rating
-        if (Common.currentResult!!.raiting != null) {
-            rating_bar.rating = Common.currentResult!!.raiting.toFloat()
+        if (Common.currentResult!!.rating != null) {
+            Log.d("MAP","rating:"+Common.currentResult!!.rating)
+            rating_bar.rating = Common.currentResult!!.rating.toFloat()
         } else {
             rating_bar.visibility = View.GONE
         }
 
         //open hours
-        if (Common.currentResult!!.operninng_hours != null) {
-            open_hour.text="Open now:"+ Common.currentResult!!.operninng_hours!!.open_now
+        if (Common.currentResult!!.operning_hours != null) {
+            open_hour.text="Open now:"+ Common.currentResult!!.operning_hours!!.open_now
         }else
         {
             open_hour.visibility = View.GONE
@@ -61,7 +63,9 @@ class ViewPlaceActivity : AppCompatActivity() {
             }
 
             override fun onResponse(call: Call<PlaceDetail>, response: Response<PlaceDetail>) {
-            mPlace = response!!.body()
+                Log.d("MAP"," Response successfull:"+response.body()!!.status+" "+response.body()!!.result)
+
+                mPlace = response!!.body()
                 place_adress.text = mPlace!!.result!!.formatted_address
                 place_name.text = mPlace!!.result!!.name
             }
@@ -71,8 +75,9 @@ class ViewPlaceActivity : AppCompatActivity() {
 
     private fun getPlaceDetailUrl(place_id: String): String {
         val url  = StringBuilder("https://maps.googleapis.com/maps/api/place/details/json")
-        url.append("?place=$place_id")
+        url.append("?place_id=$place_id")
         url.append("&key=AIzaSyBBpxR0F5EW3BQRz7fWJr5BlAx8a_2PhoY")
+        Log.d("URL_DEBUG", url.toString())
         return url.toString()
 
     }
@@ -85,6 +90,7 @@ class ViewPlaceActivity : AppCompatActivity() {
         url.append("?maxwidth=$maxWidth")
         url.append("&photoreference=$photo_reference")
         url.append("&key=AIzaSyBBpxR0F5EW3BQRz7fWJr5BlAx8a_2PhoY")
+        Log.d("URL_DEBUG", url.toString())
         return url.toString()
     }
 
