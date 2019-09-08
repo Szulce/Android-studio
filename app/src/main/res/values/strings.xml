@@ -47,4 +47,16 @@
     <string name="profile">Profile</string>
     <string name="ustawienia_konta">USTAWIENIA KONTA</string>
     <string name="change_picture">CHANGE PICTURE</string>
+    <string name="wstaw_posta">Wstaw Posta</string>
+    <string name="tre">treść</string>
+    <string name="tagi">TAGI</string>
+    <string name="add_image">ADD IMAGE</string>
+    <string name="achievement">ACHIEVEMENT</string>
+    <string name="body_and_mind">BODY AND MIND</string>
+    <string name="healthy_lifestyle">HEALTHY LIFESTYLE</string>
+    <string name="fit_diet">FIT DIET</string>
+    <string name="sport_in_freetime">SPORT IN FREETIME</string>
+    <string name="vegan_products">VEGAN PRODUCTS</string>
+    <string name="image_to_post">image to post</string>
+    <string name="post_mealt">post mealt</string>
 </resources>

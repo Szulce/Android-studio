@@ -60,7 +60,6 @@ class MastodonFragment : Fragment() {
 
         viewOfFragment.swipeRefreshLayout.setOnRefreshListener {
              UpdateTimeline()
-
          }
 
         return viewOfFragment
@@ -75,7 +74,7 @@ class MastodonFragment : Fragment() {
     override fun onViewStateRestored(savedInstanceState: Bundle?) {
         super.onViewStateRestored(savedInstanceState)
         if(savedInstanceState!=null) {
-            if (savedInstanceState!!.getInt("position", 0) > 0) {
+            if (savedInstanceState.getInt("position", 0) > 0) {
                 recyclerView.layoutManager?.scrollToPosition(position)
 
             }
