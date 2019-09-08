@@ -1,4 +1,4 @@
-package szulc.magdalena.fitpost
+package szulc.magdalena.fitpost.mastodon
 
 import android.text.Html
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import szulc.magdalena.fitpost.R
 
 class RecycleAdapter(private val myDataset: MutableList<MyStatus>) :
     RecyclerView.Adapter<RecycleAdapter.MyViewHolder>() {
@@ -17,7 +18,7 @@ class RecycleAdapter(private val myDataset: MutableList<MyStatus>) :
 
     // Create new views (invoked by the layout manager)
     override fun onCreateViewHolder(parent: ViewGroup,
-                                    viewType: Int): RecycleAdapter.MyViewHolder {
+                                    viewType: Int): MyViewHolder {
 
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.recycler_view_item, parent, false) as LinearLayout

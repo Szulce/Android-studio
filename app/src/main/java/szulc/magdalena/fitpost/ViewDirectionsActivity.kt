@@ -111,7 +111,7 @@ class ViewDirectionsActivity : AppCompatActivity(), OnMapReadyCallback {
                     R.string.your_position
                 )
             ).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
-            mCurrentMarker = mMap!!.addMarker(markerOptions)
+            mCurrentMarker = mMap.addMarker(markerOptions)
             mMap.moveCamera(
                 CameraUpdateFactory.newLatLng(
                     LatLng(
@@ -201,7 +201,7 @@ class ViewDirectionsActivity : AppCompatActivity(), OnMapReadyCallback {
                         R.string.your_position
                     )
                 ).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
-                mCurrentMarker = mMap!!.addMarker(markerOptions)
+                mCurrentMarker = mMap.addMarker(markerOptions)
                 mMap.moveCamera(
                     CameraUpdateFactory.newLatLng(
                         LatLng(
@@ -224,7 +224,7 @@ class ViewDirectionsActivity : AppCompatActivity(), OnMapReadyCallback {
 
                 //path
                 drawPath(mLastLocation, Common.currentResult!!.geometry!!.location!!)
-
+//camera
 
             }
         }
@@ -243,7 +243,7 @@ class ViewDirectionsActivity : AppCompatActivity(), OnMapReadyCallback {
             StringBuilder(location.lat.toString()).append(",").append(location.lng.toString())
                 .toString()
 
-        mService.getDirections(origin, destination).enqueue(object : retrofit2.Callback<String> {
+        mService.getDirections(origin, destination,"AIzaSyBBpxR0F5EW3BQRz7fWJr5BlAx8a_2PhoY").enqueue(object : retrofit2.Callback<String> {
             override fun onFailure(call: Call<String>, t: Throwable) {
                 Log.d("MAP", ""+t.message)
             }
@@ -254,6 +254,9 @@ class ViewDirectionsActivity : AppCompatActivity(), OnMapReadyCallback {
             }
 
         })
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(LatLng(mLastLocation.latitude,mLastLocation.longitude)))
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(11f))
     }
 
 
@@ -304,7 +307,7 @@ class ViewDirectionsActivity : AppCompatActivity(), OnMapReadyCallback {
             var jsonObject: JSONObject
             var routes: List<List<HashMap<String, String>>>? = null
             try {
-                jsonObject = JSONObject(p0[0])
+                jsonObject = JSONObject(p0[0]!!)
                 val parser = DirectionsJSONParser()
                 routes = parser.parse(jsonObject)
             } catch (e: JSONException) {
@@ -319,7 +322,7 @@ class ViewDirectionsActivity : AppCompatActivity(), OnMapReadyCallback {
             var polylineOptions: PolylineOptions? = null
 
             Log.d("MAP","result:"+result!!.size+"result"+result!!)
-            for (i in result!!.indices) {
+            for (i in result.indices) {
                 points = ArrayList()
                 polylineOptions = PolylineOptions()
                 val path = result[i]
@@ -338,6 +341,8 @@ class ViewDirectionsActivity : AppCompatActivity(), OnMapReadyCallback {
             polyline = mMap.addPolyline(polylineOptions)
             waitingDialog.dismiss()
             }
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(LatLng(mLastLocation.latitude,mLastLocation.longitude)))
+            mMap.animateCamera(CameraUpdateFactory.zoomTo(11f))
         }
 
         override fun onPreExecute() {

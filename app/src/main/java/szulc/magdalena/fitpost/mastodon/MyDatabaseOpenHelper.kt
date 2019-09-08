@@ -1,4 +1,4 @@
-package szulc.magdalena.fitpost
+package szulc.magdalena.fitpost.mastodon
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import org.jetbrains.anko.db.*
@@ -15,7 +15,7 @@ data class MyStatus(
     val createdAt:String
 )
 
-class MyDatabaseOpenHelper(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "MyDatabase", null, MyDatabaseOpenHelper.DB_VERSION) {
+class MyDatabaseOpenHelper(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "MyDatabase", null, DB_VERSION) {
     init {
         instance = this
     }
@@ -25,7 +25,7 @@ class MyDatabaseOpenHelper(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "MyDatab
         val DB_VERSION = 7
 
         @Synchronized
-        fun getInstance(ctx: Context): MyDatabaseOpenHelper{
+        fun getInstance(ctx: Context): MyDatabaseOpenHelper {
             if(instance == null){
                 instance = MyDatabaseOpenHelper(ctx.getApplicationContext())
             }

@@ -13,7 +13,7 @@ import com.sys1yagi.mastodon4j.api.method.Statuses
 import com.sys1yagi.mastodon4j.api.method.Timelines
 import org.jetbrains.anko.db.replace
 import org.jetbrains.anko.db.select
-import szulc.magdalena.fitpost.database
+import szulc.magdalena.fitpost.mastodon.database
 import szulc.magdalena.fitpost.mastodon.AppWidget
 import szulc.magdalena.fitpost.mastodon.Authenticator
 

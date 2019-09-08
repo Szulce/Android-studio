@@ -2,10 +2,14 @@ package szulc.magdalena.fitpost
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
+import szulc.magdalena.fitpost.mastodon.AboutActivity
+import szulc.magdalena.fitpost.mastodon.SettingsActivity
 import szulc.magdalena.fitpost.ui.main.SectionsPagerAdapter
 
 class MainActivity : AppCompatActivity() {
@@ -30,6 +34,8 @@ class MainActivity : AppCompatActivity() {
                 startActivity(formulaIntent)
         }
 
+        val toolBar:androidx.appcompat.widget.Toolbar = findViewById(R.id.mainToolBar)
+        setSupportActionBar(toolBar)
         viewPager.addOnPageChangeListener(object :ViewPager.OnPageChangeListener {
 
             override fun onPageScrollStateChanged(state: Int) {
@@ -54,7 +60,29 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+         val inflater = menuInflater
+        inflater.inflate(R.menu.menu_mastodon,menu)
+        return true
+    }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        return when (item.itemId){
+
+            R.id.settingsButtoon -> {
+                    val intent = Intent(this, SettingsActivity::class.java)
+                      startActivity(intent)
+                true
+            }
+            R.id.aboutButton -> {
+                  val intent = Intent(this, AboutActivity::class.java)
+                    startActivity(intent)
+                true
+            }
+             else -> super.onOptionsItemSelected(item)
+        }
+    }
 
 
 }

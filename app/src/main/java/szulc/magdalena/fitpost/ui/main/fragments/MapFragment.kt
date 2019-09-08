@@ -134,6 +134,9 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
         //enable zoom control
         nMap.uiSettings.isZoomControlsEnabled = true
+    //camera
+        nMap.moveCamera(CameraUpdateFactory.newLatLng(LatLng(latitude,longitude)))
+        nMap.animateCamera(CameraUpdateFactory.zoomTo(11f))
     }
 
 

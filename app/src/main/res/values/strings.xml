@@ -41,4 +41,10 @@
     <string name="open">Open :</string>
     <string name="your_position">Your position</string>
     <string name="please_wait">Please wait</string>
+    <string name="appversion">AppVersion</string>
+    <string name="about_app_inst"><![CDATA[Aplikacja mająca na celu usprawnić pomóc i zainspirować do życia w trybie fit. Zawiera ona 3 sekcje : mapy -> pomagają znaleść restuację, oraz sklepy w których można zaopatrzyć się w żywność oraz siłownie na których można zadbać o swoją witalność, posty -> miejsce mentalnej motywacji , gdzie można podzielić się swoimi osiągnięciami, umiejętnościami przyżądzania fit posiłków itp., ćwiczenia -> odliczanie interwałów czasowych wspomagających którtkie intensywne treningi.]]></string>
+    <string name="connection">Connection</string>
+    <string name="profile">Profile</string>
+    <string name="ustawienia_konta">USTAWIENIA KONTA</string>
+    <string name="change_picture">CHANGE PICTURE</string>
 </resources>

@@ -1,4 +1,4 @@
-package szulc.magdalena.fitpost
+package szulc.magdalena.fitpost.mastodon
 
 import android.app.Activity
 import android.os.Bundle
@@ -8,7 +8,7 @@ import com.sys1yagi.mastodon4j.api.entity.Status
 import com.sys1yagi.mastodon4j.api.method.Statuses
 import kotlinx.android.synthetic.main.activity_show_message.*
 import org.jetbrains.anko.doAsync
-import szulc.magdalena.fitpost.mastodon.Authenticator
+import szulc.magdalena.fitpost.R
 
 /**
  * Skeleton of an Android Things activity.

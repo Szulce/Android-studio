@@ -8,23 +8,36 @@
         android:background="#C8A798"
         tools:context=".MainActivity">
 
+
     <com.google.android.material.appbar.AppBarLayout
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:theme="@style/AppTheme.AppBarOverlay" android:background="#8E2E44">
 
-        <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="64dp" app:srcCompat="@drawable/logo" android:id="@+id/imageView"
-                android:contentDescription="@string/app_name" android:scaleType="centerInside"
-                android:cropToPadding="false"/>
+        <androidx.appcompat.widget.Toolbar
+                android:id="@+id/mainToolBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:title=""
+                app:subtitleTextAppearance="@style/TextAppearance.AppCompat.Display4">
+
+            <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="64dp"
+                    android:contentDescription="@string/app_name"
+                    android:cropToPadding="false"
+                    android:scaleType="centerInside"
+                    app:srcCompat="@drawable/logo" />
+        </androidx.appcompat.widget.Toolbar>
 
         <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tabs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#8E2E44"
-                app:tabGravity="fill" app:tabTextAppearance="@style/TextAppearance.AppCompat.Display1"/>
+                app:tabGravity="fill"
+                app:tabTextAppearance="@style/TextAppearance.AppCompat.Display1" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.viewpager.widget.ViewPager
@@ -41,4 +54,5 @@
             android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/fab_margin"
             app:maxImageSize="100dp" android:foreground="@drawable/add_meal" tools:targetApi="m"/>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

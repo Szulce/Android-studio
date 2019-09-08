@@ -52,6 +52,10 @@
         -->
         <activity android:name=".AddFormulaActivity" />
         <activity android:name=".TimerSetTimeActivity" />
+        <activity android:name=".mastodon.AboutActivity" />
+        <activity android:name=".mastodon.ShowMessage" />
+        <activity android:name=".mastodon.ShowStream"/>
+        <activity android:name=".mastodon.SettingsActivity"/>
 
         <receiver
                 android:name="receivers.TimerNotificationReceiver"
@@ -82,7 +86,7 @@
                 android:name=".providers.DataContentProvider"
                 android:authorities="szulc.magdalena.fitpost"
                 android:enabled="true"
-                android:exported="true" />
+                android:exported="false" />
 
         <service
                 android:name=".services.UpdateIntentService"
@@ -98,9 +102,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".mastodon.AboutActivity" />
-        <activity android:name=".mastodon.Main2Activity" />
-        <activity android:name=".mastodon.MainActivityOLD" />
 
         <meta-data
                 android:name="preloaded_fonts"

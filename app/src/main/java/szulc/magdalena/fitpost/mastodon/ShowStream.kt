@@ -1,4 +1,4 @@
-package szulc.magdalena.fitpost
+package szulc.magdalena.fitpost.mastodon
 
 import android.app.Activity
 import android.os.Bundle
@@ -15,7 +15,7 @@ import com.sys1yagi.mastodon4j.api.method.Timelines
 import kotlinx.android.synthetic.main.activity_show_stream.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
-import szulc.magdalena.fitpost.mastodon.Authenticator
+import szulc.magdalena.fitpost.R
 
 /**
  * Skeleton of an Android Things activity.
@@ -65,7 +65,7 @@ class ShowStream : Activity() {
 
 
 
-    fun download(public_local:Boolean = true, username: String?, password: String?):Unit{
+    private fun download(public_local:Boolean = true, username: String?, password: String?):Unit{
         doAsync {
 
             val file = filesDir.absolutePath

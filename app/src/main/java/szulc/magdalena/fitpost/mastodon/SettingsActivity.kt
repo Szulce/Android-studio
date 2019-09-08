@@ -1,8 +1,9 @@
-package szulc.magdalena.fitpost
+package szulc.magdalena.fitpost.mastodon
 
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import szulc.magdalena.fitpost.R
 
 /**
  * Skeleton of an Android Things activity.

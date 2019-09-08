@@ -1,9 +1,10 @@
-package szulc.magdalena.fitpost
+package szulc.magdalena.fitpost.mastodon
 
 
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.preference.PreferenceFragmentCompat
+import szulc.magdalena.fitpost.R
 import java.io.File
 
 
