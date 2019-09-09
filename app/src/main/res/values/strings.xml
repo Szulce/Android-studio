@@ -61,4 +61,5 @@
     <string name="post_mealt">SEND</string>
     <string name="image_captred" translatable="false">image captred</string>
     <string name="todo" translatable="false">TODO</string>
+    <string name="stoper">Stoper</string>
 </resources>

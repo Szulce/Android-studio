@@ -4,21 +4,25 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.media.Image
 import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
 import android.view.*
+import android.widget.ImageView
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.fragment_tab3.*
 import szulc.magdalena.fitpost.R
-import szulc.magdalena.fitpost.receivers.TimerExpiredReceiver
-import szulc.magdalena.fitpost.TimerSetTimeActivity
-import szulc.magdalena.fitpost.util.NotificationUtil
-import szulc.magdalena.fitpost.util.PrefUtil
+import szulc.magdalena.fitpost.timer.receivers.TimerExpiredReceiver
+import szulc.magdalena.fitpost.settings.TimerSetTimeActivity
+import szulc.magdalena.fitpost.timer.util.NotificationUtil
+import szulc.magdalena.fitpost.timer.util.PrefUtil
+import java.sql.Array
 import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  * Class managing timerA
@@ -32,10 +36,12 @@ class TimerFragment : Fragment() {
 
     private lateinit var timer: CountDownTimer
     private lateinit var viewOfFragment: View
-    private val exerciseLength = longArrayOf(30L, 60L, 120L, 60L, 30L,30L,60L)//in seconds
+    private val exerciseLength = longArrayOf(30L, 60L, 120L, 60L, 30L)//in seconds
+    private val exerciseImages = listOf(R.drawable.exercise1,R.drawable.exercise2,R.drawable.exercise4,R.drawable.exercise5,R.drawable.excercise3)
     private var exerciseId = 0
     private var timerActualStatus = TimerStatus.Stop
     private var timeRemaining = 0L
+    var imageView:ImageView?=null
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -47,8 +53,8 @@ class TimerFragment : Fragment() {
         val pauseFab: FloatingActionButton = viewOfFragment.findViewById(R.id.floatingActionButtonPause)
         val stopFab: FloatingActionButton = viewOfFragment.findViewById(R.id.floatingActionButtonStop)
 
-
-
+        imageView= viewOfFragment.findViewById(R.id.imageView2)
+        imageView?.setImageResource(exerciseImages[exerciseId])
 
         playFab.setOnClickListener {
             Log.i("startTimer", "Timer start button pressed.")
@@ -149,8 +155,9 @@ class TimerFragment : Fragment() {
             updateTimerButtons()
             updateCountDownUi()
         } else {
-            //TODO Fin viewOfFragment
+            exerciseId = 0
         }
+        imageView2.setImageResource(exerciseImages[exerciseId])
     }
 
     private fun startTimer() {
@@ -216,20 +223,6 @@ class TimerFragment : Fragment() {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_timer,menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId){
-            R.id.action_settings -> {
-                val intent = Intent(viewOfFragment.context,TimerSetTimeActivity::class.java)
-                startActivity(intent)
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
 
     companion object {
 

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:title="@string/About" android:id="@+id/aboutButton"/>
     <item android:title="@string/Settings" android:id="@+id/settingsButtoon"/>
+    <item android:id="@+id/action_settings_timer" android:title="@string/stoper" />
 </menu>

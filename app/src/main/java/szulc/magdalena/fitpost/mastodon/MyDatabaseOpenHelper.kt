@@ -13,9 +13,9 @@ data class MyStatus(
     val reblogsCount:Long,
     val language:String?,
     val visibility:String?,
-    val createdAt:String,
-    val mediaAttachments:String?,
-    val tags:String?
+    val createdAt:String//,
+//    val mediaAttachments:String?,
+//    val tags:String?
 )
 
 class MyDatabaseOpenHelper(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "MyDatabase", null, DB_VERSION) {
@@ -49,9 +49,10 @@ class MyDatabaseOpenHelper(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "MyDatab
             "reblogsCount",
             "language",
             "visibility",
-            "createdAt",
-            "mediaAttachments",
-            "tags"
+            "createdAt"
+            //,
+//            "mediaAttachments",
+//            "tags"
         )
     }
 
@@ -66,9 +67,11 @@ class MyDatabaseOpenHelper(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "MyDatab
             "reblogsCount" to INTEGER,
             "language" to TEXT+ DEFAULT("'en'"),
             "visibility" to TEXT+ DEFAULT("'public'"),
-            "createdAt" to INTEGER,
-            "mediaAttachments" to TEXT,
-            "tags" to TEXT)
+            "createdAt" to INTEGER
+//            ,
+//            "mediaAttachments" to TEXT,
+//            "tags" to TEXT
+        )
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {

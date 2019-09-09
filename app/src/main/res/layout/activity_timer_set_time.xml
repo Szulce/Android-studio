@@ -5,21 +5,13 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent" android:layout_height="match_parent"
         android:background="#C8A798"
-        tools:context=".TimerSetTimeActivity">
+        tools:context=".settings.TimerSetTimeActivity">
 
     <com.google.android.material.appbar.AppBarLayout
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:theme="@style/AppTheme.AppBarOverlay" android:background="#8E2E44">
 
-
-        <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_height="match_parent"
-                android:layout_width="?attr/actionBarSize"
-                android:background="#8E2E44"
-                app:popupTheme="@style/AppTheme.PopupOverlay"
-        />
 
         <ImageView
                 android:layout_width="wrap_content"
@@ -30,8 +22,11 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <fragment android:id="@+id/timerSettingsFragment" android:name="szulc.magdalena.fitpost.TimerSetTimeActivity"
-              android:layout_width="match_parent" android:layout_height="match_parent"
-              app:layout_behavior="@string/appbar_scrolling_view_behavior"></fragment>
+    <fragment
+            android:id="@+id/timerSettingsFragment"
+            android:name="szulc.magdalena.fitpost.settings.TimerSettingsFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

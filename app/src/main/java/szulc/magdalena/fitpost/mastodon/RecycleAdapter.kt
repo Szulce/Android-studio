@@ -47,17 +47,17 @@ class RecycleAdapter(private val myDataset: MutableList<MyStatus>) :
                 "Language: " + myDataset[position].language + " Type: " + myDataset[position].visibility
             text2.text = msg
         }
-        if(myDataset[position].tags!=null){
-            text4.text =
-                "Tags:" + myDataset[position].tags.toString()
-        }
+//        if(myDataset[position].tags!=null){
+//            text4.text =
+//                "Tags:" + myDataset[position].tags.toString()
+//        }
         val image: ImageView = holder.view.findViewById(R.id.Icon)
         val imageMessage: ImageView = holder.view.findViewById(R.id.imageViewImage)
         Picasso.get().load(myDataset[position].avatar).into(image)
         //todo if ot null
-        if(myDataset[position].mediaAttachments!=null) {
-            Picasso.get().load(myDataset[position].mediaAttachments).into(imageMessage)//todo
-        }
+//        if(myDataset[position].mediaAttachments!=null) {
+//            Picasso.get().load(myDataset[position].mediaAttachments).into(imageMessage)//todo
+//        }
         }
 
     // Return the size of your dataset (invoked by the layout manager)

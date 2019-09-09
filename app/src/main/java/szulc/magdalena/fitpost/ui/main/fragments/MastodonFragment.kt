@@ -14,7 +14,7 @@ import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import szulc.magdalena.fitpost.R
 import szulc.magdalena.fitpost.mastodon.*
-import szulc.magdalena.fitpost.services.UpdateIntentService
+import szulc.magdalena.fitpost.mastodon.services.UpdateIntentService
 
 
 /**

@@ -16,7 +16,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -33,12 +32,11 @@ import kotlinx.android.synthetic.main.fragment_tab1.view.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import szulc.magdalena.fitpost.MainActivity
 import szulc.magdalena.fitpost.R
-import szulc.magdalena.fitpost.ViewPlaceActivity
-import szulc.magdalena.fitpost.remote.IGoogleAPIService
-import szulc.magdalena.fitpost.remote.common.Common
-import szulc.magdalena.fitpost.remote.model.MyPlaces
+import szulc.magdalena.fitpost.map.ViewPlaceActivity
+import szulc.magdalena.fitpost.map.remote.IGoogleAPIService
+import szulc.magdalena.fitpost.map.remote.common.Common
+import szulc.magdalena.fitpost.map.remote.model.MyPlaces
 
 /**
  * Class to manage map fragment

@@ -5,7 +5,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#C8A798"
-        tools:context=".ViewPlaceActivity">
+        tools:context=".map.ViewPlaceActivity">
     <LinearLayout
             android:orientation="vertical"
             android:layout_centerVertical="true"

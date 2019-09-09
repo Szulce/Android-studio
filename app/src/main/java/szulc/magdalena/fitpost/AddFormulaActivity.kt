@@ -11,11 +11,10 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.EditText
-import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import kotlinx.android.synthetic.main.activity_add_formula.*
-import szulc.magdalena.fitpost.services.UpdateIntentService
+import szulc.magdalena.fitpost.mastodon.services.UpdateIntentService
 import java.io.File
 import java.io.FileOutputStream
 import java.util.*

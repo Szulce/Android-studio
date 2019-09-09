@@ -8,8 +8,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
-import szulc.magdalena.fitpost.mastodon.AboutActivity
-import szulc.magdalena.fitpost.mastodon.SettingsActivity
+import szulc.magdalena.fitpost.settings.AboutActivity
+import szulc.magdalena.fitpost.settings.SettingsActivity
+import szulc.magdalena.fitpost.settings.TimerSetTimeActivity
 import szulc.magdalena.fitpost.ui.main.SectionsPagerAdapter
 
 class MainActivity : AppCompatActivity() {
@@ -78,6 +79,12 @@ class MainActivity : AppCompatActivity() {
             R.id.aboutButton -> {
                   val intent = Intent(this, AboutActivity::class.java)
                     startActivity(intent)
+                true
+            }
+            R.id.action_settings_timer -> {
+                val intent = Intent(this,
+                    TimerSetTimeActivity::class.java)
+                startActivity(intent)
                 true
             }
              else -> super.onOptionsItemSelected(item)
