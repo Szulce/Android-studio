@@ -28,15 +28,20 @@ class RecycleAdapter(private val myDataset: MutableList<MyStatus>) :
 
     // Replace the contents of a view (invoked by the layout manager)
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        var text1:TextView= holder.view.findViewById(R.id.recycle_textView1)
-        var text2:TextView= holder.view.findViewById(R.id.reycle_textView2)
-        var text3:TextView= holder.view.findViewById(R.id.recycle_textView3)
+        val text1:TextView= holder.view.findViewById(R.id.recycle_textView1)
+        val text2:TextView= holder.view.findViewById(R.id.reycle_textView2)
+        val text3:TextView= holder.view.findViewById(R.id.recycle_textView3)
         text1.text = Html.fromHtml(myDataset[position].content)
-        text2.text = "Fav:"+myDataset[position].favouritesCount.toString()+"Reblogs:"+myDataset[position].reblogsCount.toString()
-        var msg = myDataset[position].language+" "+myDataset[position].visibility
-        text3.text = msg
-        var image:ImageView = holder.view.findViewById(R.id.Icon)
+        text3.text = "Likes:"+myDataset[position].favouritesCount.toString()+" "+myDataset[position].createdAt
+        if(myDataset[position].language!=null && myDataset[position].visibility!=null){
+        val msg = "Language: "+myDataset[position].language+" Visibility"+myDataset[position].visibility
+        text2.text = msg
+        }
+        val image:ImageView = holder.view.findViewById(R.id.Icon)
+        val imageMessage :ImageView = holder.view.findViewById(R.id.imageViewImage)
         Picasso.get().load(myDataset[position].avatar).into(image)
+        //todo if ot null
+        Picasso.get().load(myDataset[position].avatar).into(imageMessage)//todo
     }
 
     // Return the size of your dataset (invoked by the layout manager)

@@ -8,8 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.sys1yagi.mastodon4j.api.Range
-import com.sys1yagi.mastodon4j.api.method.Timelines
 import kotlinx.android.synthetic.main.fragment_tab2.*
 import kotlinx.android.synthetic.main.fragment_tab2.view.*
 import org.jetbrains.anko.doAsync
@@ -38,8 +36,8 @@ class MastodonFragment : Fragment() {
         viewOfFragment =  inflater.inflate(R.layout.fragment_tab2,container,false)
 
         Log.i("Mastodon","Post activity Tab started.")
-        viewManager = LinearLayoutManager(viewOfFragment.context) as RecyclerView.LayoutManager
-        content = mutableListOf<MyStatus>()
+        viewManager = LinearLayoutManager(viewOfFragment.context)
+        content = mutableListOf()
         viewAdapter  = RecycleAdapter(content)
         recyclerView = viewOfFragment.findViewById<RecyclerView>(R.id.recyclerView).apply {
             setHasFixedSize(true)
@@ -58,8 +56,9 @@ class MastodonFragment : Fragment() {
 
         })
 
+        updateTimeline()
         viewOfFragment.swipeRefreshLayout.setOnRefreshListener {
-             UpdateTimeline()
+             updateTimeline()
          }
 
         return viewOfFragment
@@ -82,7 +81,7 @@ class MastodonFragment : Fragment() {
     }
 
 
-    fun UpdateTimeline():Unit{
+    private fun updateTimeline():Unit{
         val db = viewOfFragment.context.database.readableDatabase
         UpdateIntentService.startActionUpdate(viewOfFragment.context,"any")
 
@@ -96,7 +95,7 @@ class MastodonFragment : Fragment() {
 
             uiThread {
                 viewAdapter.notifyDataSetChanged()
-                swipeRefreshLayout.setRefreshing(false)
+                swipeRefreshLayout.isRefreshing = false
             }
         }
 

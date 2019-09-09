@@ -2,19 +2,19 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <EditTextPreference
-            android:defaultValue="Default value"
+            android:defaultValue="USERNAME"
             android:selectAllOnFocus="true"
             android:singleLine="true"
             android:title="@string/username" android:key="username_input"
             android:id="@+id/username_input"/>
     <EditTextPreference
-            android:defaultValue="Default value"
+            android:defaultValue="PASSWORD"
             android:selectAllOnFocus="true"
             android:singleLine="true"
             android:title="@string/password" android:key="password_input"
             android:id="@+id/password_input"/>
     <EditTextPreference
-            android:defaultValue="Default value"
+            android:defaultValue="SERVER"
             android:selectAllOnFocus="true"
             android:singleLine="true"
             android:title="server" android:key="server_input" android:id="@+id/server_input"/>

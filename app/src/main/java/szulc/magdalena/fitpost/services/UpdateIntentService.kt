@@ -5,7 +5,9 @@ import android.appwidget.AppWidgetManager
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
 import android.preference.PreferenceManager
+import android.util.Log
 import com.sys1yagi.mastodon4j.MastodonClient
 import com.sys1yagi.mastodon4j.api.Range
 import com.sys1yagi.mastodon4j.api.entity.Status
@@ -18,10 +20,12 @@ import szulc.magdalena.fitpost.mastodon.AppWidget
 import szulc.magdalena.fitpost.mastodon.Authenticator
 
 private const val ACTION_SEND = "szulc.magdalena.fitpost.mastodon.action.SEND"
+private const val ACTION_SEND_WITH_IMAGE = "szulc.magdalena.fitpost.mastodon.action.SEND_WITH_IMAGE"
 private const val ACTION_UPDATE = "szulc.magdalena.fitpost.mastodon.action.UPDATE"
 
-private const val EXTRA_STREM_TYPE = "szulc.magdalena.fitpost.mastodon.extra.STREAM_TYPE"
+private const val EXTRA_STREAM_TYPE = "szulc.magdalena.fitpost.mastodon.extra.STREAM_TYPE"
 private const val EXTRA_SEND_TEXT = "szulc.magdalena.fitpost.mastodon.extra.SEND_TEXT"
+private const val EXTRA_SEND_BITMAP = "szulc.magdalena.fitpost.mastodon.extra.SEND_BITMAP"
 
 
 class UpdateIntentService : IntentService("UpdateIntentService") {
@@ -48,16 +52,24 @@ class UpdateIntentService : IntentService("UpdateIntentService") {
                     )
             } catch (e: Throwable) {
                 print("wrong username or password")
+                Log.e("MASTODON","Wrong password")
             }
         }
 
         when (intent?.action) {
             ACTION_SEND -> {
                 val msg = intent.getStringExtra(EXTRA_SEND_TEXT)
+                Log.d("MASTODON","ACTION SEND : $msg")
                 handleActionSend(msg)
             }
+            ACTION_SEND_WITH_IMAGE -> {
+                val msg = intent.getStringExtra(EXTRA_SEND_TEXT)
+                val bitmap = intent.getParcelableExtra(EXTRA_SEND_BITMAP) as Bitmap
+                Log.d("MASTODON","ACTION SEND : $msg")
+                handleActionSendWithImage(msg)//todo
+            }
             ACTION_UPDATE -> {
-                val stype = intent.getStringExtra(EXTRA_STREM_TYPE)
+                val stype = intent.getStringExtra(EXTRA_STREAM_TYPE)
                 handleActionUpdate(stype)
             }
         }
@@ -71,9 +83,20 @@ class UpdateIntentService : IntentService("UpdateIntentService") {
      */
     private fun handleActionSend(msg: String?) {
         println("Service:Send")
+        Log.d("MASTODON","Handle Action Send: $msg")
         if (client == null) return
         val status = Statuses(client!!)
         val r = status.postStatus(msg!!, null, null, false, null, Status.Visibility.Private).execute()
+    Log.d("MASTODON","Send status: $r")
+    }
+
+    private fun handleActionSendWithImage(msg: String?) {
+        println("Service:Send")
+        Log.d("MASTODON","Handle Action Send: $msg")
+        if (client == null) return
+        val status = Statuses(client!!)
+        val r = status.postStatus(msg!!, null, null, false, null, Status.Visibility.Private).execute()
+        Log.d("MASTODON","Send status: $r")
     }
 
     /**
@@ -117,7 +140,7 @@ class UpdateIntentService : IntentService("UpdateIntentService") {
         intent.action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
         val ids = AppWidgetManager.getInstance(
             application
-        ).getAppWidgetIds(ComponentName(getApplication(), AppWidget::class.java!!))
+        ).getAppWidgetIds(ComponentName(application, AppWidget::class.java))
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids)
         sendBroadcast(intent)
 
@@ -140,6 +163,15 @@ class UpdateIntentService : IntentService("UpdateIntentService") {
             }
             context.startService(intent)
         }
+        @JvmStatic
+        fun startActionSendWithImage(context: Context, msg: String,imgBitmap: Bitmap) {
+            val intent = Intent(context, UpdateIntentService::class.java).apply {
+                action = ACTION_SEND_WITH_IMAGE
+                putExtra(EXTRA_SEND_TEXT, msg)
+                putExtra(EXTRA_SEND_BITMAP,imgBitmap)
+            }
+            context.startService(intent)
+        }
 
         /**
          * Starts this service to perform action Baz with the given parameters. If
@@ -151,7 +183,7 @@ class UpdateIntentService : IntentService("UpdateIntentService") {
         fun startActionUpdate(context: Context, stype: String) {
             val intent = Intent(context, UpdateIntentService::class.java).apply {
                 action = ACTION_UPDATE
-                putExtra(EXTRA_STREM_TYPE, stype)
+                putExtra(EXTRA_STREAM_TYPE, stype)
             }
             context.startService(intent)
 

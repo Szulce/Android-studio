@@ -1,6 +1,7 @@
 package szulc.magdalena.fitpost.mastodon
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
+import android.graphics.Bitmap
 import org.jetbrains.anko.db.*
 
 
@@ -12,7 +13,8 @@ data class MyStatus(
     val reblogsCount:Long,
     val language:String?,
     val visibility:String?,
-    val createdAt:String
+    val createdAt:String,
+    val attachedImage:Bitmap
 )
 
 class MyDatabaseOpenHelper(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "MyDatabase", null, DB_VERSION) {
@@ -22,12 +24,12 @@ class MyDatabaseOpenHelper(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "MyDatab
 
     companion object {
         private var instance: MyDatabaseOpenHelper? = null
-        val DB_VERSION = 7
+        const val DB_VERSION = 9
 
         @Synchronized
         fun getInstance(ctx: Context): MyDatabaseOpenHelper {
             if(instance == null){
-                instance = MyDatabaseOpenHelper(ctx.getApplicationContext())
+                instance = MyDatabaseOpenHelper(ctx.applicationContext)
             }
             return instance!!
         }
@@ -37,8 +39,8 @@ class MyDatabaseOpenHelper(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "MyDatab
             db.select("MyStatus").orderBy("id",SqlOrderDirection.DESC).exec { parseList(rowParser) }
         }
 
-        val TABLE_STATUS= "MyStatus"
-        val COLUMNS = arrayOf<String>(
+        const val TABLE_STATUS= "MyStatus"
+        val COLUMNS = arrayOf(
             "id",
             "content",
             "avatar",
@@ -46,7 +48,8 @@ class MyDatabaseOpenHelper(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "MyDatab
             "reblogsCount",
             "language",
             "visibility",
-            "createdAt"
+            "createdAt",
+            "attachedImage"
         )
     }
 
@@ -61,7 +64,8 @@ class MyDatabaseOpenHelper(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "MyDatab
             "reblogsCount" to INTEGER,
             "language" to TEXT+ DEFAULT("'en'"),
             "visibility" to TEXT+ DEFAULT("'public'"),
-            "createdAt" to INTEGER)
+            "createdAt" to INTEGER,
+            "attachedImage" to TEXT)
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {

@@ -11,9 +11,9 @@ import java.io.File
 import java.util.*
 
 object Authenticator {
-    const val CLIENT_ID = "client_id"
-    const val CLIENT_SECRET = "client_secret"
-    const val ACCESS_TOKEN = "access_token"
+    private const val CLIENT_ID = "client_id"
+    private const val CLIENT_SECRET = "client_secret"
+    private const val ACCESS_TOKEN = "access_token"
 
     fun appRegistrationIfNeeded(
         instanceName: String,
@@ -71,7 +71,7 @@ object Authenticator {
             .build()
     }
 
-    fun getAccessToken(
+    private fun getAccessToken(
         instanceName: String,
         clientId: String,
         clientSecret: String,
@@ -86,7 +86,7 @@ object Authenticator {
         return apps.postUserNameAndPassword(clientId, clientSecret, Scope(), email!!, password!!).execute()
     }
 
-    fun appRegistration(instanceName: String): AppRegistration {
+    private fun appRegistration(instanceName: String): AppRegistration {
         val client = MastodonClient.Builder(instanceName, OkHttpClient.Builder(), Gson()).build()
         val apps = Apps(client)
         return apps.createApp(
