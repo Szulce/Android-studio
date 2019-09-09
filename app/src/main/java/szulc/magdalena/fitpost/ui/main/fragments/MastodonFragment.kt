@@ -81,7 +81,7 @@ class MastodonFragment : Fragment() {
     }
 
 
-    private fun updateTimeline():Unit{
+    private fun updateTimeline() {
         val db = viewOfFragment.context.database.readableDatabase
         UpdateIntentService.startActionUpdate(viewOfFragment.context,"any")
 

@@ -33,8 +33,8 @@ object Authenticator {
         if (properties[CLIENT_ID] == null) {
             println("try app registration...")
             val appRegistration = appRegistration(instanceName)
-            properties.put(CLIENT_ID, appRegistration.clientId)
-            properties.put(CLIENT_SECRET, appRegistration.clientSecret)
+            properties[CLIENT_ID] = appRegistration.clientId
+            properties[CLIENT_SECRET] = appRegistration.clientSecret
             properties.store(file.outputStream(), "app registration")
         } else {
             println("app registration found...")
@@ -56,7 +56,7 @@ object Authenticator {
                 email,
                 password
             )
-            properties.put(ACCESS_TOKEN, accessToken.accessToken)
+            properties[ACCESS_TOKEN] = accessToken.accessToken
             properties.store(file.outputStream(), "app registration")
         } else {
             println("access token found...")
@@ -90,7 +90,7 @@ object Authenticator {
         val client = MastodonClient.Builder(instanceName, OkHttpClient.Builder(), Gson()).build()
         val apps = Apps(client)
         return apps.createApp(
-            "kotlindon",
+            "Fitpost",
             scope = Scope()
         ).execute()
     }

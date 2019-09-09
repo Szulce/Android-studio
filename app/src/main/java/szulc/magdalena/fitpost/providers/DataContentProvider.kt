@@ -18,19 +18,19 @@ class DataContentProvider : ContentProvider() {
 
 
     companion object {
-        val AUTHORITY = "com.example.socialmediaproject.provider.DataContentProvider"
-        private val STATUS_TABLE= "status"
-        val CONTENT_PATH = "status"
-        val CONTENT_URI :Uri = Uri.parse("content://"+ AUTHORITY +"/"+ STATUS_TABLE)
-        val CONTENT_TYPE = AUTHORITY +"/"+ STATUS_TABLE
-        val STATUS = -1
+        const val AUTHORITY = "szulc.magdalena.fitpost.providers.DataContentProvider"
+        private const val STATUS_TABLE= "status"
+        const val CONTENT_PATH = "status"
+        val CONTENT_URI :Uri = Uri.parse("content://$AUTHORITY/$STATUS_TABLE")
+        const val CONTENT_TYPE = "$AUTHORITY/$STATUS_TABLE"
+        const val STATUS = -1
     }
 
 
     private fun initializeUriMatching(){
         uriMatcher.addURI(
             AUTHORITY,
-            CONTENT_PATH +"/#",1)
+            "$CONTENT_PATH/#",1)
         uriMatcher.addURI(
             AUTHORITY,
             CONTENT_PATH,0)
@@ -38,13 +38,13 @@ class DataContentProvider : ContentProvider() {
 
     override fun onCreate():Boolean{
         val handler = MyDatabaseOpenHelper(context!!)
-        database = handler.getWritableDatabase()
+        database = handler.writableDatabase
         return true
     }
 
     override fun delete(uri: Uri, selection: String?, selectionArgs: Array<String>?): Int {
         dbInnit()
-        var delCount:Int
+        val delCount:Int
         when(uriMatcher.match(uri))
         {
             STATUS ->delCount = database.delete(MyDatabaseOpenHelper.TABLE_STATUS,selection,selectionArgs)
@@ -102,7 +102,7 @@ class DataContentProvider : ContentProvider() {
 
     private fun dbInnit() {
         val handler = MyDatabaseOpenHelper(context!!)
-        database = handler.getWritableDatabase()
+        database = handler.writableDatabase
 
     }
 }

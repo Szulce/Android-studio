@@ -8,6 +8,9 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.preference.PreferenceManager
 import android.util.Log
+import androidx.constraintlayout.widget.Group
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import com.sys1yagi.mastodon4j.MastodonClient
 import com.sys1yagi.mastodon4j.api.Range
 import com.sys1yagi.mastodon4j.api.entity.Status
@@ -66,7 +69,7 @@ class UpdateIntentService : IntentService("UpdateIntentService") {
                 val msg = intent.getStringExtra(EXTRA_SEND_TEXT)
                 val bitmap = intent.getParcelableExtra(EXTRA_SEND_BITMAP) as Bitmap
                 Log.d("MASTODON","ACTION SEND : $msg")
-                handleActionSendWithImage(msg)//todo
+                handleActionSendWithImage(msg,bitmap)
             }
             ACTION_UPDATE -> {
                 val stype = intent.getStringExtra(EXTRA_STREAM_TYPE)
@@ -90,12 +93,17 @@ class UpdateIntentService : IntentService("UpdateIntentService") {
     Log.d("MASTODON","Send status: $r")
     }
 
-    private fun handleActionSendWithImage(msg: String?) {
+    private fun handleActionSendWithImage(msg: String?, bitmap: Bitmap) {
         println("Service:Send")
         Log.d("MASTODON","Handle Action Send: $msg")
         if (client == null) return
         val status = Statuses(client!!)
-        val r = status.postStatus(msg!!, null, null, false, null, Status.Visibility.Private).execute()
+        val gson:Gson = Gson().fromJson()
+        val mediaIds = client?.post("media",
+        { 'file' :[ $file, undef ], %$params },
+        headers => { Content_Type => 'form-data' },
+        );
+        val r = status.postStatus(msg!!, null, mediaIds, false, null, Status.Visibility.Private).execute()
         Log.d("MASTODON","Send status: $r")
     }
 
@@ -131,7 +139,9 @@ class UpdateIntentService : IntentService("UpdateIntentService") {
                     "reblogsCount" to res.reblogsCount,
                     "language" to res.language,
                     "visibility" to res.visibility,
-                    "createdAt" to res.createdAt
+                    "createdAt" to res.createdAt,
+                    "mediaAttachments" to res.mediaAttachments,
+                    "tags" to res.tags
                 )
             }
         }
