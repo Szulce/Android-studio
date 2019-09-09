@@ -4,12 +4,13 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.media.Image
 import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
@@ -17,12 +18,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.fragment_tab3.*
 import szulc.magdalena.fitpost.R
 import szulc.magdalena.fitpost.timer.receivers.TimerExpiredReceiver
-import szulc.magdalena.fitpost.settings.TimerSetTimeActivity
 import szulc.magdalena.fitpost.timer.util.NotificationUtil
 import szulc.magdalena.fitpost.timer.util.PrefUtil
-import java.sql.Array
 import java.util.*
-import kotlin.collections.ArrayList
 
 /**
  * Class managing timerA
@@ -147,17 +145,21 @@ class TimerFragment : Fragment() {
         setNewTimerSeconds()
 
         progressBarCountDown.progress = 60
-        if (exerciseId != exerciseLength.size) {
+        if (exerciseId != exerciseLength.size-1) {
             exerciseId++
             PrefUtil.setTimerRemaining(exerciseLength[exerciseId], viewOfFragment.context)
             timeRemaining = exerciseLength[exerciseId]
 
             updateTimerButtons()
             updateCountDownUi()
+            imageView2.setImageResource(exerciseImages[exerciseId])
         } else {
             exerciseId = 0
+
         }
-        imageView2.setImageResource(exerciseImages[exerciseId])
+
+
+
     }
 
     private fun startTimer() {

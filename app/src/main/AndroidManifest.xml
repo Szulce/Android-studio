@@ -59,6 +59,7 @@
         <activity android:name=".settings.TimerSetTimeActivity" />
         <activity android:name=".settings.AboutActivity" />
         <activity android:name=".settings.SettingsActivity"/>
+        <activity android:name=".AppWidget"/>
 
         <receiver
                 android:name="szulc.magdalena.fitpost.timer.receivers.TimerNotificationReceiver"
@@ -101,7 +102,7 @@
                 android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
