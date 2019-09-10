@@ -10,6 +10,7 @@ import android.net.Uri
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
+import szulc.magdalena.fitpost.MainActivity
 import szulc.magdalena.fitpost.timer.AppConstants
 import szulc.magdalena.fitpost.R
 import szulc.magdalena.fitpost.timer.receivers.TimerNotificationReceiver
@@ -36,7 +37,7 @@ class NotificationUtil {
             val notificationBuilder = getNotificationBuilder(context, CHANNEL_TIMER_ID,true)
             notificationBuilder.setContentTitle("Timer is Running")
                 .setContentText("End?")
-                .setContentIntent(getPendingIntentWithStack(context,TimerFragment::class.java))
+                .setContentIntent(getPendingIntentWithStack(context,MainActivity::class.java))
                 .setOngoing(true)
                 .addAction(R.drawable.stop,"stop",stopPendingIntent)
                 .addAction(R.drawable.pause,"pause",pausePendingIntent)
@@ -60,7 +61,7 @@ class NotificationUtil {
             val notificationBuilder = getNotificationBuilder(context, CHANNEL_TIMER_ID,true)
             notificationBuilder.setContentTitle("Timer is Running")
                 .setContentText("END : ${dateFormat.format(Date(wakeUpTime))}")
-                .setContentIntent(getPendingIntentWithStack(context,TimerFragment::class.java))
+                .setContentIntent(getPendingIntentWithStack(context,MainActivity::class.java))
                 .setOngoing(true)
                 .addAction(R.drawable.stop,"start",startPendingIntent)
 
@@ -80,7 +81,7 @@ class NotificationUtil {
             val notificationBuilder = getNotificationBuilder(context, CHANNEL_TIMER_ID,true)
             notificationBuilder.setContentTitle("Timer is Paused.")
                 .setContentText("Resume ?")
-                .setContentIntent(getPendingIntentWithStack(context,TimerFragment::class.java))
+                .setContentIntent(getPendingIntentWithStack(context,MainActivity::class.java))
                 .setOngoing(true)
                 .addAction(R.drawable.play,"resume",resumePendingIntent)
 

@@ -12,7 +12,9 @@ import android.text.Spanned
 import android.widget.RemoteViews
 import androidx.annotation.RequiresApi
 import szulc.magdalena.fitpost.AddFormulaActivity
+import szulc.magdalena.fitpost.MainActivity
 import szulc.magdalena.fitpost.R
+
 
 /**
  * Implementation of App Widget functionality.
@@ -36,25 +38,22 @@ class AppWidget : AppWidgetProvider() {
             null,
             null
         )
-        result!!.moveToFirst()
+        result?.moveToFirst()
 
-        // There may be multiple widgets active, so update all of them
         for (appWidgetId in appWidgetIds) {
-            val intent: Intent = Intent(context, AddFormulaActivity::class.java)
-            val pendingIntent = PendingIntent.getActivity(context, 0, intent, 0, null)
 
-            val views = RemoteViews(context.packageName, R.layout.app_widget)
-            views.setOnClickPendingIntent(R.id.buttonPostFromWidget,pendingIntent)
-
-            appWidgetManager.updateAppWidget(appWidgetId,views)
-
-
-            val contentCol = result.getColumnIndex("content")
+            val contentCol = result?.getColumnIndex("content")
             // var widgetText = result.getString(content_col).toString()
             // println(widgetText)
-            val widgetText = Html.fromHtml(result.getString(contentCol).toString())
+
+            var widgetText = if (result != null) {
+                Html.fromHtml(result.getString(contentCol!!).toString())
+
+            } else {
+                null
+            }
             // result.close()
-            result.moveToNext()
+            result?.moveToNext()
 
 
             updateAppWidget(
@@ -80,12 +79,39 @@ class AppWidget : AppWidgetProvider() {
 
         internal fun updateAppWidget(
             context: Context, appWidgetManager: AppWidgetManager,
-            appWidgetId: Int, widgetText: Spanned
+            appWidgetId: Int, widgetText: Spanned?
         ) {
 
             // Construct the RemoteViews object
-            val views = RemoteViews(context.packageName, R.layout.app_widget)
-            views.setTextViewText(R.id.appwidget_text, widgetText)
+            val views =
+                RemoteViews(context.packageName, R.layout.app_widget)
+            if (widgetText != null)
+                views.setTextViewText(R.id.appwidget_text, widgetText)
+
+            val intentPost = Intent(context, AddFormulaActivity::class.java)
+            val pendingPostIntent = PendingIntent.getActivity(context, 0, intentPost, 0)
+            views.setOnClickPendingIntent(R.id.buttonPostFromWidget, pendingPostIntent)
+
+            val intentApp = Intent(context, MainActivity::class.java)
+            val pendingAppIntent = PendingIntent.getActivity(context, 0, intentApp, 0)
+            views.setOnClickPendingIntent(R.id.buttonViewFromWidget, pendingAppIntent)
+
+            val mapIntent = Intent(context, MainActivity::class.java)
+            mapIntent.putExtra("PAGE", 0)
+            mapIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            val pendingMapIntent = PendingIntent.getActivity(context, 0, mapIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+            views.setOnClickPendingIntent(
+                R.id.buttonMapFromWidget,
+                pendingMapIntent
+            )
+            val timerIntent = Intent(context, MainActivity::class.java)
+            timerIntent.putExtra("PAGE", 2)
+            timerIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            val pendingTimerIntent = PendingIntent.getActivity(context, 0, timerIntent, timerIntent.flags)
+            views.setOnClickPendingIntent(
+                R.id.buttonTimerFromWidget,
+                pendingTimerIntent
+            )
 
             // Instruct the widget manager to update the widget
             appWidgetManager.updateAppWidget(appWidgetId, views)

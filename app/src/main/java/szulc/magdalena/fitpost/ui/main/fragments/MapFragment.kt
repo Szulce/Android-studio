@@ -301,7 +301,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     }
 
     override fun onStop() {
-        fusedLocationProviderClient.removeLocationUpdates(locationCallback)
+        fusedLocationProviderClient?.removeLocationUpdates(locationCallback)
         super.onStop()
     }
 

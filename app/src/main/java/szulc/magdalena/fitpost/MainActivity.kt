@@ -2,6 +2,7 @@ package szulc.magdalena.fitpost
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -57,7 +58,18 @@ class MainActivity : AppCompatActivity() {
 
 
         })
-         viewPager?.setCurrentItem(1,false)
+        if(intent.extras!= null){
+            Log.d("MAIN","EXTRAS FROM WIDGET")
+            when {
+                intent.extras!!.get("PAGE") == 0 -> viewPager.setCurrentItem(0,false)
+                intent.extras!!.get("PAGE") == 2 -> viewPager.setCurrentItem(2,false)
+                else -> viewPager.setCurrentItem(1,false)
+            }
+        }
+        else {
+            Log.d("MAIN","EXTRAS FROM WIDGET IS NULL")
+            viewPager.setCurrentItem(1, false)
+        }
 
     }
 

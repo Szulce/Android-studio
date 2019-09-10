@@ -4,12 +4,12 @@
     <string name="tab_text_2">Posts</string>
     <string name="tab_text_3">Exercises</string>
     <string name="google_maps_API_key" translatable="false">AIzaSyBBpxR0F5EW3BQRz7fWJr5BlAx8a_2PhoY</string>
-    <string name="settings">settings</string>
+    <string name="settings">Settings</string>
     <string name="username">username</string>
     <string name="password">password</string>
     <string name="About">About</string>
     <string name="Settings">Settings</string>
-    <string name="AppVersion" translatable="false">0.0.1</string>
+    <string name="AppVersion" translatable="false">0.0.11</string>
     <string name="socialmediaapp_powsta_a_w_2019_roku_w_ramach_zaj_prowadzonych_przez_umk" translatable="false">
         SocialMediaApp powstała w
         2019 roku w ramach zajęć prowadzonych przez UMK
@@ -23,7 +23,7 @@
     <string name="wednesday" translatable="false">Wednesday</string>
     <string name="home">HOME</string>
     <string name="local">LOCAL</string>
-    <string name="post_meal">POST MEAL</string>
+    <string name="post_meal">ADD CONTENT</string>
     <string name="back">back</string>
     <string name="next">next</string>
     <string name="market">market</string>
@@ -41,7 +41,7 @@
     <string name="open">Open :</string>
     <string name="your_position">Your position</string>
     <string name="please_wait">Please wait</string>
-    <string name="appversion" translatable="false">AppVersion</string>
+    <string name="appversion">AppVersion</string>
     <string name="about_app_inst"><![CDATA[Aplikacja mająca na celu usprawnić pomóc i zainspirować do życia w trybie fit. Zawiera ona 3 sekcje : mapy -> pomagają znaleść restuację, oraz sklepy w których można zaopatrzyć się w żywność oraz siłownie na których można zadbać o swoją witalność, posty -> miejsce mentalnej motywacji , gdzie można podzielić się swoimi osiągnięciami, umiejętnościami przyżądzania fit posiłków itp., ćwiczenia -> odliczanie interwałów czasowych wspomagających którtkie intensywne treningi.]]></string>
     <string name="connection">Connection</string>
     <string name="profile">Profile</string>
@@ -61,8 +61,11 @@
     <string name="post_mealt">SEND</string>
     <string name="image_captred" translatable="false">image captred</string>
     <string name="todo" translatable="false">TODO</string>
-    <string name="stoper">Stoper</string>
+    <string name="stoper">Timer</string>
     <string name="timer_length">Timer Length</string>
     <string name="timer_run_time">How many minutes should the timer run</string>
     <string name="post">POST</string>
+    <string name="open_app">HOME</string>
+    <string name="open_map">MAP</string>
+    <string name="open_timer">TIMER</string>
 </resources>

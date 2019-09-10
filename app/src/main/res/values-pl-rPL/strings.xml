@@ -8,13 +8,13 @@
     <string name="About">O aplikacji</string>
     <string name="Settings">Ustawienia</string>
     <string name="password">hasło</string>
-    <string name="add_widget">Dodaj widget</string>
+    <string name="add_widget">DODAJ WIDGET</string>
     <string name="appwidget_text">Przykład</string>
     <string name="hint">podpowiedź</string>
-    <string name="home">Strona Startowa</string>
+    <string name="home">STRONA STARTOWA</string>
     <string name="local">Lokalna</string>
     <string name="monday">Poniedziałek</string>
-    <string name="post_meal">Dodaj Posta</string>
+    <string name="post_meal">DODAJ TREŚĆ</string>
     <string name="back">wróć</string>
     <string name="next">dalej</string>
     <string name="market">market</string>
@@ -29,15 +29,15 @@
     <string name="title_activity_maps">Mapa</string>
     <string name="title_activity_view_directions">Mapa</string>
     <string name="your_position">Twoja pozycja</string>
-    <string name="please_wait">Please wait</string>
+    <string name="please_wait">Proszę czekać</string>
     <string name="about_app_inst"><![CDATA[Aplikacja mająca na celu usprawnić pomóc i zainspirować do życia w trybie fit. Zawiera ona 3 sekcje : mapy -> pomagają znaleść restuację, oraz sklepy w których można zaopatrzyć się w żywność oraz siłownie na których można zadbać o swoją witalność, posty -> miejsce mentalnej motywacji , gdzie można podzielić się swoimi osiągnięciami, umiejętnościami przyżądzania fit posiłków itp., ćwiczenia -> odliczanie interwałów czasowych wspomagających którtkie intensywne treningi.]]></string>
-    <string name="achievement">ACHIEVEMENT</string>
-    <string name="body_and_mind">Ciało i Umysł</string>
-    <string name="healthy_lifestyle">ZDROWY TRYB ŻYCIA</string>
-    <string name="fit_diet">FIT DIET</string>
-    <string name="sport_in_freetime">SPORT IN FREETIME</string>
+    <string name="achievement">OSIĄGNIĘCIA</string>
+    <string name="body_and_mind">CIAŁO I UMYSŁ</string>
+    <string name="healthy_lifestyle">ZDROWIE</string>
+    <string name="fit_diet">DIETA FIT</string>
+    <string name="sport_in_freetime">SPORT</string>
     <string name="vegan_products">VEGAŃSKIE PRODUKTY</string>
-    <string name="add_image">Dodaj zdjęcie</string>
+    <string name="add_image">DODAJ ZDJĘCIE</string>
     <string name="change_picture">zmień zdjęcie</string>
     <string name="connection">Połączenie</string>
     <string name="profile">Profil</string>
@@ -47,8 +47,11 @@
     <string name="wstaw_posta">STWÓRZ POSTA</string>
     <string name="post_mealt">WYŚLIJ</string>
     <string name="stoper">Stoper</string>
-    <string name="timer_length">Timer Length</string>
+    <string name="timer_length">Długość odliczanego czasu</string>
     <string name="post">POST</string>
-    <string name="appversion" translatable="false">Wersja Aplikacji</string>
+    <string name="appversion" translatable="false">"Wersja "</string>
     <string name="timer_run_time">Ile minut powinnien odliczać czasomierz</string>
+    <string name="open_app">STRONA GŁÓWNA</string>
+    <string name="open_map">MAPA</string>
+    <string name="open_timer">ĆWICZ</string>
 </resources>

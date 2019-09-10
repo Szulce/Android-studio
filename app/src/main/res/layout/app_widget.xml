@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#595E4D4D"
         android:padding="@dimen/widget_margin">
 
     <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
         <LinearLayout
@@ -35,7 +33,7 @@
                     android:contentDescription="@string/appwidget_text"
                     android:text="@string/appwidget_text"
                     android:textColor="#ffffff"
-                    android:textSize="30sp"
+                    android:textSize="15sp"
                     android:textStyle="italic" />
 
         </LinearLayout>
@@ -43,16 +41,54 @@
         <LinearLayout
                 android:id="@+id/buttonLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_height="220dp"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical">
 
             <Button
                     android:id="@+id/buttonPostFromWidget"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:textColor="#8E2E44"
                     android:layout_weight="1"
-                    android:background="#C84D4A4A"
+                    android:background="#8DE9E0E0"
                     android:text="@string/post"
+                    android:textStyle="bold" />
+            <Button
+                    android:id="@+id/buttonViewFromWidget"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:textColor="#8E2E44"
+                    android:layout_weight="1"
+                    android:background="#8DE9E0E0"
+                    android:text="@string/open_app"
+                    android:textStyle="bold" />
+            <Button
+                    android:id="@+id/buttonTimerFromWidget"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:textColor="#8E2E44"
+                    android:layout_weight="1"
+                    android:background="#8DE9E0E0"
+                    android:text="@string/open_timer"
+                    android:textStyle="bold" />
+            <Button
+                    android:id="@+id/buttonMapFromWidget"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:textColor="#8E2E44"
+                    android:layout_weight="1"
+                    android:background="#8DE9E0E0"
+                    android:text="@string/open_map"
                     android:textStyle="bold" />
         </LinearLayout>
 

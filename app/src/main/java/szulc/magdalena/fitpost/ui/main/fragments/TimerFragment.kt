@@ -124,7 +124,7 @@ class TimerFragment : Fragment() {
         }
 
         val alarmSetTime = PrefUtil.getAlarmTimerBackgroundSet(viewOfFragment.context)
-        if (alarmSetTime > 0) {
+        if (alarmSetTime > 0 && timerActualStatus != TimerStatus.Stop) {
             timeRemaining -= nowSeconds - alarmSetTime
         }
         if (timeRemaining <= 0){

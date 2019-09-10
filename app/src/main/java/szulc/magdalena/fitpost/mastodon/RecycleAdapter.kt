@@ -1,18 +1,14 @@
 package szulc.magdalena.fitpost.mastodon
 
-import android.os.Build
 import android.text.Html
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import szulc.magdalena.fitpost.R
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 
 class RecycleAdapter(private val myDataset: MutableList<MyStatus>) :
     RecyclerView.Adapter<RecycleAdapter.MyViewHolder>() {
