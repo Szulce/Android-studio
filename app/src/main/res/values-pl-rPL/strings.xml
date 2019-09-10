@@ -32,11 +32,11 @@
     <string name="please_wait">Please wait</string>
     <string name="about_app_inst"><![CDATA[Aplikacja mająca na celu usprawnić pomóc i zainspirować do życia w trybie fit. Zawiera ona 3 sekcje : mapy -> pomagają znaleść restuację, oraz sklepy w których można zaopatrzyć się w żywność oraz siłownie na których można zadbać o swoją witalność, posty -> miejsce mentalnej motywacji , gdzie można podzielić się swoimi osiągnięciami, umiejętnościami przyżądzania fit posiłków itp., ćwiczenia -> odliczanie interwałów czasowych wspomagających którtkie intensywne treningi.]]></string>
     <string name="achievement">ACHIEVEMENT</string>
-    <string name="body_and_mind">BODY AND MIND</string>
-    <string name="healthy_lifestyle">HEALTHY LIFESTYLE</string>
+    <string name="body_and_mind">Ciało i Umysł</string>
+    <string name="healthy_lifestyle">ZDROWY TRYB ŻYCIA</string>
     <string name="fit_diet">FIT DIET</string>
     <string name="sport_in_freetime">SPORT IN FREETIME</string>
-    <string name="vegan_products">VEGAN PRODUCTS</string>
+    <string name="vegan_products">VEGAŃSKIE PRODUKTY</string>
     <string name="add_image">Dodaj zdjęcie</string>
     <string name="change_picture">zmień zdjęcie</string>
     <string name="connection">Połączenie</string>
@@ -47,4 +47,8 @@
     <string name="wstaw_posta">STWÓRZ POSTA</string>
     <string name="post_mealt">WYŚLIJ</string>
     <string name="stoper">Stoper</string>
+    <string name="timer_length">Timer Length</string>
+    <string name="post">POST</string>
+    <string name="appversion" translatable="false">Wersja Aplikacji</string>
+    <string name="timer_run_time">Ile minut powinnien odliczać czasomierz</string>
 </resources>

@@ -59,7 +59,7 @@
         <activity android:name=".settings.TimerSetTimeActivity" />
         <activity android:name=".settings.AboutActivity" />
         <activity android:name=".settings.SettingsActivity"/>
-        <activity android:name=".AppWidget"/>
+
 
         <receiver
                 android:name="szulc.magdalena.fitpost.timer.receivers.TimerNotificationReceiver"
@@ -75,8 +75,9 @@
         <receiver
                 android:name="szulc.magdalena.fitpost.timer.receivers.TimerExpiredReceiver"
                 android:enabled="true"
-                android:exported="true" />
-        <receiver android:name=".AppWidget">
+                android:exported="true"
+                android:permission="TODO" />
+        <receiver android:name=".mastodon.providers.AppWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>

@@ -16,7 +16,7 @@ import com.sys1yagi.mastodon4j.api.method.Timelines
 import org.jetbrains.anko.db.replace
 import org.jetbrains.anko.db.select
 import szulc.magdalena.fitpost.mastodon.database
-import szulc.magdalena.fitpost.AppWidget
+import szulc.magdalena.fitpost.mastodon.providers.AppWidget
 import szulc.magdalena.fitpost.mastodon.Authenticator
 
 private const val ACTION_SEND = "szulc.magdalena.fitpost.mastodon.action.SEND"

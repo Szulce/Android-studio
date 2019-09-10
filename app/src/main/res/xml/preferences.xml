@@ -3,8 +3,8 @@
                                                xmlns:app="http://schemas.android.com/apk/res-auto">
 <com.pavelsikun.seekbarpreference.SeekBarPreferenceCompat
 android:key ="szulc.magdalena.timer.timer_lenght"
-android:title = "Timer Length"
-android:summary = "How many minutes should the timer run"
+android:title = "@string/timer_length"
+android:summary = "@string/timer_run_time"
 android:defaultValue = "3"
 app:msbp_minValue = "1"
 app:msbp_maxValue = "10"

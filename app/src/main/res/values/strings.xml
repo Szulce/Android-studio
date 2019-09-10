@@ -62,4 +62,7 @@
     <string name="image_captred" translatable="false">image captred</string>
     <string name="todo" translatable="false">TODO</string>
     <string name="stoper">Stoper</string>
+    <string name="timer_length">Timer Length</string>
+    <string name="timer_run_time">How many minutes should the timer run</string>
+    <string name="post">POST</string>
 </resources>
