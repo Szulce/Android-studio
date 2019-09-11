@@ -1,43 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#C8A798"
         tools:context=".MainActivity">
 
+
     <com.google.android.material.appbar.AppBarLayout
-            android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:theme="@style/AppTheme.AppBarOverlay" android:background="#8E2E44">
+            android:layout_height="wrap_content"
+            android:background="#8E2E44"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
         <androidx.appcompat.widget.Toolbar
                 android:id="@+id/mainToolBar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:subtitleTextAppearance="@style/TextAppearance.AppCompat.Display4"
+                app:title="">
 
             <ImageView
+                    android:id="@+id/imageView"
                     android:layout_width="wrap_content"
-                    android:layout_height="64dp" app:srcCompat="@drawable/logo" android:id="@+id/imageView"
-                    android:contentDescription="@string/app_name" android:scaleType="centerInside"
-                    android:cropToPadding="false"/>
+                    android:layout_height="64dp"
+                    android:contentDescription="@string/app_name"
+                    android:cropToPadding="false"
+                    android:scaleType="centerInside"
+                    app:srcCompat="@drawable/logo" />
         </androidx.appcompat.widget.Toolbar>
+
         <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tabs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#8E2E44"
-                app:tabGravity="fill" app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"/>
-
+                app:tabGravity="fill"
+                app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.viewpager.widget.ViewPager
             android:id="@+id/view_pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" app:layout_anchorGravity="start|center"
-            app:layout_anchor="@+id/fab"/>
+            android:background="@drawable/unsplash"
+            app:layout_anchor="@+id/fab"
+            app:layout_anchorGravity="start|center"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
@@ -45,5 +54,8 @@
             android:layout_height="82dp"
             android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/fab_margin"
-            app:maxImageSize="100dp" android:foreground="@drawable/add_meal" tools:targetApi="m"/>
+            android:foreground="@drawable/add_meal"
+            app:maxImageSize="100dp"
+            tools:targetApi="m" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
