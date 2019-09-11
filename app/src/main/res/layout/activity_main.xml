@@ -7,46 +7,57 @@
         tools:context=".MainActivity">
 
 
-    <com.google.android.material.appbar.AppBarLayout
+    <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#8E2E44"
-            android:theme="@style/AppTheme.AppBarOverlay">
+            android:layout_height="match_parent"
+            android:background="@drawable/pobrane"
+            android:orientation="vertical">
 
-        <androidx.appcompat.widget.Toolbar
-                android:id="@+id/mainToolBar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:subtitleTextAppearance="@style/TextAppearance.AppCompat.Display4"
-                app:title="">
-
-            <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="64dp"
-                    android:contentDescription="@string/app_name"
-                    android:cropToPadding="false"
-                    android:scaleType="centerInside"
-                    app:srcCompat="@drawable/logo" />
-        </androidx.appcompat.widget.Toolbar>
-
-        <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tabs"
+        <com.google.android.material.appbar.AppBarLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#8E2E44"
-                app:tabGravity="fill"
-                app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget" />
-    </com.google.android.material.appbar.AppBarLayout>
+                android:theme="@style/AppTheme.AppBarOverlay">
 
-    <androidx.viewpager.widget.ViewPager
-            android:id="@+id/view_pager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/unsplash"
-            app:layout_anchor="@+id/fab"
-            app:layout_anchorGravity="start|center"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+            <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/mainToolBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:subtitleTextAppearance="@style/TextAppearance.AppCompat.Display4"
+                    app:title="">
+
+                <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="64dp"
+                        android:contentDescription="@string/app_name"
+                        android:cropToPadding="false"
+                        android:scaleType="centerInside"
+                        app:srcCompat="@drawable/logo" />
+            </androidx.appcompat.widget.Toolbar>
+
+            <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tabs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#8E2E44"
+                    app:tabGravity="fill"
+                    app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget" />
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/color_bottom_line_disabled">
+
+            <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/view_pager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        </FrameLayout>
+
+    </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"

@@ -25,7 +25,8 @@
             android:roundIcon="@drawable/add_meal"
             android:supportsRtl="true"
             android:theme="@style/AppTheme.NoActionBar"
-            tools:ignore="GoogleAppIndexingWarning">
+            tools:ignore="GoogleAppIndexingWarning"
+            android:hardwareAccelerated="false">
 
         <meta-data
                 android:name="com.google.android.geo.API_KEY"
