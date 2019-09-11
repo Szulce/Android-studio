@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
+import android.widget.CheckBox
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -17,12 +18,14 @@ import kotlinx.android.synthetic.main.activity_add_formula.*
 import szulc.magdalena.fitpost.mastodon.services.UpdateIntentService
 import java.io.File
 import java.io.FileOutputStream
+import java.lang.StringBuilder
 import java.util.*
 
 class AddFormulaActivity : AppCompatActivity() {
 
     var imagePath: String? = ""
     var imageBitmapToSend:Bitmap?=null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,16 +75,51 @@ class AddFormulaActivity : AppCompatActivity() {
 
     private fun sendMessage() {
         val edit = findViewById<EditText>(R.id.editText)
-        val message = editText.text.toString()
+        var message = editText.text.toString()
+
+        val tagsToMessage:String? = tagsToString()
+
+        message+=tagsToMessage
+
         Log.d("MASTODON", "message:$message")
         if(imageBitmapToSend==null) {
             UpdateIntentService.startActionSend(this, message)
             //UpdateIntentService.startActionUpdate(this,message)
         }else{
-            UpdateIntentService.startActionSendWithImage(this, message,imageBitmapToSend!!)
+            UpdateIntentService.startActionSendWithImage(this, message,imageBitmapToSend!!,imagePath!!)
             captured_image.setImageBitmap(null)
         }
         edit.text.clear()
+    }
+
+    private fun tagsToString(): String? {
+        val tagsTogether = StringBuilder("")
+        val achievement = findViewById<CheckBox>(R.id.checkBoxAchievement)
+        val bodyMind = findViewById<CheckBox>(R.id.checkBoxBodyAndMind)
+        val sport = findViewById<CheckBox>(R.id.checkBoxSport)
+        val vegan = findViewById<CheckBox>(R.id.checkBoxVegan)
+        val diet = findViewById<CheckBox>(R.id.checkFitDiet)
+        val healthy = findViewById<CheckBox>(R.id.checkHealthyLifestyle)
+        if(achievement.isChecked){
+            tagsTogether.append("#").append(resources.getString(R.string.achievement).replace(" ","_")).append(" ")
+        }
+        if(bodyMind.isChecked){
+            tagsTogether.append("#").append(resources.getString(R.string.body_and_mind).replace(" ","_")).append(" ")
+        }
+        if(sport.isChecked){
+            tagsTogether.append("#").append(resources.getString(R.string.sport_in_freetime).replace(" ","_")).append(" ")
+        }
+        if(vegan.isChecked){
+            tagsTogether.append("#").append(resources.getString(R.string.vegan_products).replace(" ","_")).append(" ")
+        }
+        if(diet.isChecked){
+            tagsTogether.append("#").append(resources.getString(R.string.fit_diet).replace(" ","_")).append(" ")
+        }
+        if(healthy.isChecked){
+            tagsTogether.append("#").append(resources.getString(R.string.healthy_lifestyle).replace(" ","_")).append(" ")
+        }
+        Log.d("MASTODON","tagi razem: $tagsTogether")
+        return tagsTogether.toString()
     }
 
 

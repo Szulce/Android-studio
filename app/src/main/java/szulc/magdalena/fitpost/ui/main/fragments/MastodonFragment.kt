@@ -40,7 +40,7 @@ class MastodonFragment : Fragment() {
         content = mutableListOf()
         viewAdapter  = RecycleAdapter(content)
         recyclerView = viewOfFragment.findViewById<RecyclerView>(R.id.recyclerView).apply {
-            setHasFixedSize(true)
+           // setHasFixedSize(true)
             layoutManager = viewManager
             adapter = viewAdapter
         }

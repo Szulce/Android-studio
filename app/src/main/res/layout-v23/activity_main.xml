@@ -28,7 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#8E2E44"
-                app:tabGravity="fill" app:tabTextAppearance="@style/TextAppearance.AppCompat.Display1"/>
+                app:tabGravity="fill" app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 
