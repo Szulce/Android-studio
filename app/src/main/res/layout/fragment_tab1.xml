@@ -5,9 +5,7 @@
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#C8A798"
-        tools:context=".ui.main.fragments.MapFragment"
-        >
+        tools:context=".ui.main.fragments.MapFragment">
 
     <fragment
             android:id="@+id/google_map_fragment"

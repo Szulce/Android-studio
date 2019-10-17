@@ -37,7 +37,7 @@ class RecycleAdapter(private val myDataset: MutableList<MyStatus>) :
         val text2: TextView = holder.view.findViewById(R.id.reycle_textView2)
         val text3: TextView = holder.view.findViewById(R.id.recycle_textView3)
         val text4: TextView = holder.view.findViewById(R.id.recycle_textView4)
-        text1.text = Html.fromHtml(myDataset[position].content)
+        text1.text = Html.fromHtml(myDataset[position].content.replace("#"," "))
         text3.text =
             " " + myDataset[position].favouritesCount.toString() + " " +
                     myDataset[position].createdAt.slice(0..9)

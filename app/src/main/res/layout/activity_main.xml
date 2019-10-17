@@ -45,17 +45,11 @@
                     app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget" />
         </com.google.android.material.appbar.AppBarLayout>
 
-        <FrameLayout
+        <androidx.viewpager.widget.ViewPager
+                android:id="@+id/view_pager"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/color_bottom_line_disabled">
-
-            <androidx.viewpager.widget.ViewPager
-                    android:id="@+id/view_pager"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-        </FrameLayout>
+                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     </LinearLayout>
 

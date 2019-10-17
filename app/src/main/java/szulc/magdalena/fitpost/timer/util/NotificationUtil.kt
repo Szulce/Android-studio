@@ -53,7 +53,7 @@ class NotificationUtil {
         fun showTimerRunning(context: Context,wakeUpTime:Long){
 
             val startIntent = Intent(context,TimerNotificationReceiver::class.java)
-            startIntent.action = AppConstants.ACTION_START
+            startIntent.action = AppConstants.ACTION_STOP
             val startPendingIntent = PendingIntent.getBroadcast(context,0,startIntent,PendingIntent.FLAG_UPDATE_CURRENT)
 
             val dateFormat = SimpleDateFormat.getTimeInstance(SimpleDateFormat.SHORT)
@@ -63,7 +63,7 @@ class NotificationUtil {
                 .setContentText("END : ${dateFormat.format(Date(wakeUpTime))}")
                 .setContentIntent(getPendingIntentWithStack(context,MainActivity::class.java))
                 .setOngoing(true)
-                .addAction(R.drawable.stop,"start",startPendingIntent)
+                .addAction(R.drawable.stop,"stop",startPendingIntent)
 
             val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(CHANNEL_TIMER_ID, CHANNEL_NAME_TIMER,true)
